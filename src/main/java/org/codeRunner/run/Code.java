@@ -1,4 +1,4 @@
-package org.codeRunner;
+package org.codeRunner.run;
 
 import java.util.List;
 
@@ -11,36 +11,36 @@ public class Code {
         final String value;
         compiler(String value){this.value=value;}
     }
-    static void compile(String path){
+    static boolean compile(String path){
         String compileCMD="";
         System.out.println("Compiling");
         String extension=getExtension(path)[0];
-        if(extension.equals("c")){
-         compileCMD=String.format("%s \"%s\" -o \"%s\"",compiler.C.value,path,getExtension(path)[1]);
-        }
-        else if(extension.equals("cpp")){
-            compileCMD=String.format("%s \"%s\" -o \"%s\"",compiler.CPP.value,path,getExtension(path)[1]);
-        }
-        else if (extension.equals("java")) {
-
-            compileCMD=String.format("%s %s",compiler.JAVA.value,getFileName(path));
-            CMD.run(compileCMD,getParentFolder(path));
-            return;
+        switch (extension) {
+            case "c" ->
+                    compileCMD = String.format("%s \"%s\" -o \"%s\"", compiler.C.value, path, getExtension(path)[1]);
+            case "cpp" ->
+                    compileCMD = String.format("%s \"%s\" -o \"%s\"", compiler.CPP.value, path, getExtension(path)[1]);
+            case "java" -> {
+                compileCMD = String.format("%s %s", compiler.JAVA.value, getFileName(path));
+                String error = CMD.run(compileCMD, getParentFolder(path)).get(1);
+                return error.isEmpty();
+            }
         }
         System.out.println(compileCMD);
-        CMD.run(compileCMD,"|");
+        String error=CMD.run(compileCMD,"|").get(1);
+        return error.isEmpty();
     }
     static String run(String path){
        String extension = getExtension(path)[0];
-
+       System.out.println("Running");
        String runCMD="";
-        if(extension.equals("exe")){
-            runCMD=String.format("start cmd /k \"%s\"",path);
-        }
-        else if(extension.equals("class")){
-            runCMD=String.format("start cmd /k java \"%s\"",getExtension(getFileName(path))[1]);
-            List<String>result=CMD.run(runCMD,getParentFolder(path));
-            return result.getFirst();
+        switch (extension) {
+            case "exe" -> runCMD = String.format("start cmd /k \"%s\"", path);
+            case "class" -> {
+                runCMD = String.format("start cmd /k java %s", getExtension(getFileName(path))[1]);
+                List<String> result = CMD.run(runCMD, getParentFolder(path));
+                return result.getFirst();
+            }
         }
         List<String>result=CMD.run(runCMD,"|");
         return result.getFirst();
@@ -48,7 +48,6 @@ public class Code {
 
     //Helper Functions;
     static String[] getExtension(String path) {
-        System.out.println("Running");
         int limit = 0;
         for (int i = path.length() - 1; i >= 0; i--) {
             if (path.charAt(i) == '.') {
