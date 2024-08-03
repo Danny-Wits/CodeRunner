@@ -1,44 +1,93 @@
 package org.codeRunner.GUI;
 
+import org.codeRunner.GUI.Components.Button;
+import org.codeRunner.Main;
 import org.codeRunner.run.Code;
+import org.codeRunner.run.FileSystem;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.URL;
+import java.util.ArrayList;
 
-public class CodePanel extends JPanel {
+public class CodePanel extends JPanel implements ActionListener {
     public JTextArea codeArea;
     public String language;
     public String path;
     public String name;
+    public JPanel header;
+    Button closeButton;
 
-    public CodePanel(String code, String language, String path) {
+    public CodePanel(String path) {
         super(new BorderLayout(), true);
-        this.codeArea = new JTextArea(code);
-        this.language = language;
+        this.codeArea = new JTextArea(FileSystem.readWhole(path));
+        this.language = Code.getExtension(path)[0];
         this.path = path;
         this.name = Code.getFileName(path);
+        header=new JPanel(new BorderLayout());
+        header.setBorder(new EmptyBorder(5, 10, 5, 10));
+        setTitle();
+        setActions();
+        this.add(header,BorderLayout.NORTH);
         setCodeArea();
     }
 
+    //GUI
+    private void setTitle() {
+        JLabel label=new JLabel("Path : "+path);
+        label.setFont(new Font(Font.MONOSPACED, Font.ITALIC,16));
+        header.add(label,BorderLayout.CENTER);
+    }
+
+    private void setActions() {
+        closeButton = new Button("CLOSE",this,Window.DefaultFont);
+        header.add(closeButton,BorderLayout.EAST);
+    }
     private void setCodeArea() {
-        codeArea.setBackground(Color.black);
-        codeArea.setForeground(Color.white);
+        codeArea.setBackground(Color.BLACK);
+        codeArea.setForeground(Color.GREEN);
+        codeArea.setBorder(new EmptyBorder(10, 20, 1, 10));
         codeArea.setSize(this.getWidth(), 700);
         codeArea.setFont(new Font("Bahnschrift", Font.PLAIN, 18));
         codeArea.setCaretColor(Color.cyan);
-        JScrollPane scrollPane=new JScrollPane(codeArea);
-        scrollPane.setForeground(Color.black);
+        codeArea.setCaretPosition(0);
+        JScrollPane scrollPane = new JScrollPane(codeArea);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         this.add(scrollPane, BorderLayout.CENTER);
     }
 
+    //Functionality
     public String getText() {
         return this.codeArea.getText();
     }
-    public Icon getIcon(){
-        String path = String.format("src/main/resources/assets/%sLogo.png",language);
-        return new ImageIcon(path);
+
+    public Icon getIcon() {
+        String path = String.format("/assets/%sLogo.png", language);
+        URL url = Main.class.getResource(path);
+        if (url==null)return  null;
+        return new ImageIcon(url);
     }
-    
+
+    boolean isIn(ArrayList<CodePanel> codePanelList) {
+        for (CodePanel codePanel : codePanelList) {
+            if (this.path.equals(codePanel.path)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void saveFile(){
+        FileSystem.writeWhole(getText(),this.path);
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==closeButton){
+            Main.window.removeCurrentCodePanel();
+        }
+    }
 }

@@ -9,20 +9,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8450b6e2-bb5b-49cb-90ed-69c5d7432f67" name="Changes" comment="basic build&#10;did some code clean up and added a little modularity">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/CodePanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/State.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/cLogo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/cppLogo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/javaLogo.png" afterDir="false" />
+    <list default="true" id="8450b6e2-bb5b-49cb-90ed-69c5d7432f67" name="Changes" comment="adding multiple code panels for multitaking">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/ErrorLog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/CodeRunner/CodeRunner.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/CodeRunner/codeRunner.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/CodeRunner/launch4j.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar/CodeRunner.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar/CodeRunner.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/FileSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/FileSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/CodePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/CodePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/Button.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/CMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/CMD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Code.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Code.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/FileSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/FileSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Runner.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +53,9 @@
     &quot;accountId&quot;: &quot;d9fa7560-73ad-4815-8c7c-5c56beeb07e8&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/resources/savedState.ser" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -63,31 +65,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.CMD.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Code.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
-    &quot;JAR Application.CJar.executor&quot;: &quot;Run&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/danny/OneDrive/Desktop/java/CodeRunner/src&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/danny/OneDrive/Desktop/java/CodeRunner/src/main/java/org/codeRunner/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Global Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.import&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.CMD.executor": "Run",
+    "Application.Code.executor": "Run",
+    "Application.FileSystem.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "true",
+    "JAR Application.CJar.executor": "Run",
+    "OverrideImplement.generate.javadoc": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "full.screen.before.presentation.mode": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/danny/OneDrive/Desktop/java/CodeRunner/src",
+    "onboarding.tips.debug.path": "C:/Users/danny/OneDrive/Desktop/java/CodeRunner/src/main/java/org/codeRunner/Main.java",
+    "project.structure.last.edited": "Global Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.codeRunner.GUI" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\danny\OneDrive\Desktop\java\CodeRunner\src\main\resources\Compilers" />
       <recent name="C:\Users\danny\OneDrive\Desktop\java\CodeRunner\src\main\resources\assets" />
       <recent name="C:\Users\danny\OneDrive\Desktop\java\CodeRunner\src\main\java\org\codeRunner\GUI\Components" />
       <recent name="C:\Users\danny\OneDrive\Desktop\java\CodeRunner\src\main\java\org\codeRunner\assets" />
@@ -98,7 +107,7 @@
       <command value="w" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.FileSystem">
+  <component name="RunManager" selected="JAR Application.CJar">
     <configuration name="CMD" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.codeRunner.run.CMD" />
       <module name="CodeRunner" />
@@ -171,8 +180,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.FileSystem" />
-        <item itemvalue="Application.CMD" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.CMD" />
         <item itemvalue="Application.Code" />
       </list>
     </recent_temporary>
@@ -210,7 +219,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722530700099</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="adding multiple code panels for multitaking">
+      <option name="closed" value="true" />
+      <created>1722676760198</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1722676760198</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -228,6 +245,7 @@
     <MESSAGE value="testing runtime" />
     <MESSAGE value="basic build" />
     <MESSAGE value="basic build&#10;did some code clean up and added a little modularity" />
-    <option name="LAST_COMMIT_MESSAGE" value="basic build&#10;did some code clean up and added a little modularity" />
+    <MESSAGE value="adding multiple code panels for multitaking" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding multiple code panels for multitaking" />
   </component>
 </project>
