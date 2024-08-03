@@ -1,6 +1,10 @@
 package org.codeRunner.run;
 
+import org.codeRunner.GUI.CodePanel;
+
 import java.io.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class FileSystem {
 
@@ -25,7 +29,6 @@ public class FileSystem {
     }
     public static boolean writeWhole(String content,String path){
         File file = new File(path);
-        StringBuilder code = new StringBuilder();
         if (!file.isFile()) {
             return false;
         }
@@ -38,7 +41,6 @@ public class FileSystem {
         }
         return true;
     }
-
     public static void createFile(String path) {
             File file = new File(path);
             try {
@@ -47,4 +49,32 @@ public class FileSystem {
             throw new RuntimeException(e);
             }
     }
+
+    public static State createState(List<CodePanel>list){
+       return new State(list.stream().map(e->e.path).collect(Collectors.toList()));
+    }
+    public static void saveState(State state){
+        try {
+            FileOutputStream file = new FileOutputStream("file.ser");
+            ObjectOutputStream outputStream=new ObjectOutputStream(file);
+            outputStream.writeObject(state);
+            outputStream.close();
+            file.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static State loadState(){
+        try {
+            FileInputStream file = new FileInputStream("file.ser");
+            ObjectInputStream outputStream=new ObjectInputStream(file);
+            State state = (State)outputStream.readObject();
+            outputStream.close();
+            file.close();
+            return state;
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

@@ -34,7 +34,6 @@ public class CMD {
             }
             log.add(output.toString());
             log.add(error.toString());
-            if(!error.isEmpty()) System.out.println(error);
             return log;
         } catch (IOException e) {
             throw new RuntimeException(e);

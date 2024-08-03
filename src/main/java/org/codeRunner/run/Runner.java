@@ -1,5 +1,7 @@
 package org.codeRunner.run;
 
+import javax.swing.*;
+
 public class Runner implements Runnable{
     String path;
     public Runner(String Path){
@@ -14,7 +16,7 @@ public class Runner implements Runnable{
                 case "java" -> System.out.println(Code.run(Code.getExtension(path)[1] + ".class"));
             }
         }else {
-            System.out.println("Compilation Failed");
+            JOptionPane.showMessageDialog(null,"Compilation Failed");
         }
 
     }
