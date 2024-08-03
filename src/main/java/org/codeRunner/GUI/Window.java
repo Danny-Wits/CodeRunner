@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Window extends JFrame implements ActionListener {
@@ -101,7 +102,7 @@ public class Window extends JFrame implements ActionListener {
         this.setBounds(100, 50, WIDTH, HEIGHT);
         this.setBackground(Color.black);
         this.setTitle("CODE RUNNER");
-        ImageIcon icon = new ImageIcon("src/main/resources/assets/icon.png");
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/assets/icon.png")));
         this.setIconImage(icon.getImage());
         this.setBackground(Color.DARK_GRAY);
     }
