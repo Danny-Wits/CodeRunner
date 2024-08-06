@@ -12,6 +12,10 @@ public class FileSystem {
     static final String homeDir=System.getProperty("user.home");
     static final String serFilePath =homeDir+"/savedState.ser";
     //FILE IO
+    public static boolean isFile(String batPath) {
+        File f = new File(batPath);
+        return f.isFile();
+    }
     public static String readWhole(String path) {
         File file = new File(path);
         StringBuilder code = new StringBuilder();
@@ -77,8 +81,8 @@ public class FileSystem {
 
     public static State loadState() {
         System.out.println("Loading State");
-//        File serFile = new File(serFilePath);
-//        if(!serFile.isFile())createFile(serFilePath);
+        File serFile = new File(serFilePath);
+        if(!serFile.isFile())return new State(new ArrayList<>());
         try {
             FileInputStream file = new FileInputStream(serFilePath);
             ObjectInputStream outputStream = new ObjectInputStream(file);
@@ -92,5 +96,6 @@ public class FileSystem {
             throw new RuntimeException(e);
         }
     }
+
 
 }

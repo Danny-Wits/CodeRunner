@@ -10,10 +10,12 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class CodePanel extends JPanel implements ActionListener {
+public class CodePanel extends JPanel implements ActionListener, KeyListener {
     public JTextArea codeArea;
     public String language;
     public String path;
@@ -27,28 +29,30 @@ public class CodePanel extends JPanel implements ActionListener {
         this.language = Code.getExtension(path)[0];
         this.path = path;
         this.name = Code.getFileName(path);
-        header=new JPanel(new BorderLayout());
+        header = new JPanel(new BorderLayout());
         header.setBorder(new EmptyBorder(5, 10, 5, 10));
         setTitle();
         setActions();
-        this.add(header,BorderLayout.NORTH);
+        this.add(header, BorderLayout.NORTH);
         setCodeArea();
     }
 
     //GUI
     private void setTitle() {
-        JLabel label=new JLabel("Path : "+path);
-        label.setFont(new Font(Font.MONOSPACED, Font.ITALIC,16));
-        header.add(label,BorderLayout.CENTER);
+        JLabel label = new JLabel("Path : " + path);
+        label.setFont(new Font(Font.MONOSPACED, Font.ITALIC, 16));
+        header.add(label, BorderLayout.CENTER);
     }
 
     private void setActions() {
-        closeButton = new Button("CLOSE",this,Window.DefaultFont);
-        header.add(closeButton,BorderLayout.EAST);
+        closeButton = new Button("CLOSE", this, Window.DefaultFont);
+        header.add(closeButton, BorderLayout.EAST);
     }
+
     private void setCodeArea() {
         codeArea.setBackground(Color.BLACK);
         codeArea.setForeground(Color.GREEN);
+        codeArea.addKeyListener(this);
         codeArea.setBorder(new EmptyBorder(10, 20, 1, 10));
         codeArea.setSize(this.getWidth(), 700);
         codeArea.setFont(new Font("Bahnschrift", Font.PLAIN, 18));
@@ -68,26 +72,69 @@ public class CodePanel extends JPanel implements ActionListener {
     public Icon getIcon() {
         String path = String.format("/assets/%sLogo.png", language);
         URL url = Main.class.getResource(path);
-        if (url==null)return  null;
+        if (url == null) return null;
         return new ImageIcon(url);
     }
 
-    boolean isIn(ArrayList<CodePanel> codePanelList) {
-        for (CodePanel codePanel : codePanelList) {
+    int locationIn(ArrayList<CodePanel> codePanelList) {
+        for (int i = 0; i < codePanelList.size(); i++) {
+            CodePanel codePanel = codePanelList.get(i);
             if (this.path.equals(codePanel.path)) {
-                return true;
+                return i;
             }
         }
-        return false;
+        return -1;
     }
 
-    public void saveFile(){
-        FileSystem.writeWhole(getText(),this.path);
+
+    public void saveFile() {
+        FileSystem.writeWhole(getText(), this.path);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==closeButton){
+        if (e.getSource() == closeButton) {
             Main.window.removeCurrentCodePanel();
         }
+    }
+
+    public int getCtrlKeyCode(Character c) {
+        return ((int) c) - 96;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        if (!e.isControlDown()) return;
+        int code = (int) e.getKeyChar();
+        if (e.isShiftDown()){
+            if (code == getCtrlKeyCode('s')) {
+                Main.window.saveFileAs();
+            }
+            return;
+        }
+        if (code == getCtrlKeyCode('r')) {
+            Main.window.run();
+        } else if (code == getCtrlKeyCode('s')) {
+            Main.window.saveFile();
+        }else if (code == getCtrlKeyCode('o')){
+            Main.window.openFile();
+        }
+        else if (code == getCtrlKeyCode('o')){
+            Main.window.openFile();
+        }
+        else if (code == getCtrlKeyCode('n')){
+            Main.window.newFile();
+        }
+    }
+
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }

@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ErrorLog extends JPanel implements ActionListener {
+public final class ErrorLog extends JPanel implements ActionListener {
     JTextPane errorPane;
     Button clear;
     Button close;
@@ -16,7 +16,7 @@ public class ErrorLog extends JPanel implements ActionListener {
     ErrorLog() {
         this.setLayout(new BorderLayout());
         this.setVisible(false);
-        this.setPreferredSize(new Dimension(0,100));
+        this.setPreferredSize(new Dimension(0,200));
         errorPane = new JTextPane();
         errorPane.setBorder(new EmptyBorder(10,10,10,10));
         errorPane.setFont(new Font(Font.MONOSPACED,Font.PLAIN,18));
@@ -52,4 +52,5 @@ public class ErrorLog extends JPanel implements ActionListener {
             setError("");
         }
     }
+
 }

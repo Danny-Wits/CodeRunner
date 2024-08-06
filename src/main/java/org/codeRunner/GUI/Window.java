@@ -4,18 +4,14 @@ import org.codeRunner.GUI.Components.Button;
 import org.codeRunner.run.FileSystem;
 import org.codeRunner.run.Runner;
 import org.codeRunner.run.State;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Window extends JFrame implements ActionListener {
+public class Window extends JFrame implements ActionListener{
     final int WIDTH = 1080;
     final int HEIGHT = 720;
     FileSelector fileSelector;
@@ -33,8 +29,8 @@ public class Window extends JFrame implements ActionListener {
     public Window() {
         fileSelector = new FileSelector(this);
         setWindow();
-        errorLog=new ErrorLog();
-        this.add(errorLog,BorderLayout.SOUTH);
+        errorLog = new ErrorLog();
+        this.add(errorLog, BorderLayout.SOUTH);
         newB = new Button("NEW", this, DefaultFont);
         save = new Button("SAVE", this, DefaultFont);
         saveAs = new Button("SAVE AS", this, DefaultFont);
@@ -74,17 +70,22 @@ public class Window extends JFrame implements ActionListener {
     }
 
 
-    private void setCodeTab() {
-        UIManager.put("TabbedPane.selected", Color.lightGray);
-        codeTabs = new JTabbedPane();
-        codeTabs.setFont(DefaultFont);
-    }
-
     public void reRender() {
         this.repaint();
     }
 
     //GUI
+    private void setWindow() {
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setLayout(new BorderLayout());
+        this.setBounds(100, 50, WIDTH, HEIGHT);
+        this.setBackground(Color.black);
+        this.setTitle("CODE RUNNER");
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/assets/icon.png")));
+        this.setIconImage(icon.getImage());
+        this.setBackground(Color.DARK_GRAY);
+    }
+
     private void setHeader() {
         JPanel head = new JPanel(new FlowLayout(FlowLayout.RIGHT), true);
         head.setBackground(backGroundColor);
@@ -96,15 +97,9 @@ public class Window extends JFrame implements ActionListener {
         this.add(head, BorderLayout.NORTH);
     }
 
-    private void setWindow() {
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setLayout(new BorderLayout());
-        this.setBounds(100, 50, WIDTH, HEIGHT);
-        this.setBackground(Color.black);
-        this.setTitle("CODE RUNNER");
-        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/assets/icon.png")));
-        this.setIconImage(icon.getImage());
-        this.setBackground(Color.DARK_GRAY);
+    private void setCodeTab() {
+        codeTabs = new JTabbedPane();
+        codeTabs.setFont(DefaultFont);
     }
 
     //Functionality
@@ -141,7 +136,7 @@ public class Window extends JFrame implements ActionListener {
         saveFile();
         CodePanel codePanel = currentCodePanel();
         String language = codePanel.language;
-        String path =codePanel.path;
+        String path = codePanel.path;
         runTask(path);
     }
 
@@ -149,7 +144,11 @@ public class Window extends JFrame implements ActionListener {
     //Panel Management
     void addCodePanel(CodePanel codePanel) {
         System.out.println(codePanelList.size());
-        if (codePanel.isIn(codePanelList)) return;
+        int location = codePanel.locationIn(codePanelList);
+        if (location != -1) {
+            codeTabs.setSelectedIndex(location);
+            return;
+        }
         System.out.println("ADDED");
         codePanelList.add(codePanel);
         codeTabs.addTab(codePanel.name, codePanel.getIcon(), codePanel, codePanel.path);
