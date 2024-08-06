@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.net.URL;
+import java.io.File;
 import java.util.ArrayList;
 
 public class CodePanel extends JPanel implements ActionListener, KeyListener {
@@ -45,7 +45,7 @@ public class CodePanel extends JPanel implements ActionListener, KeyListener {
     }
 
     private void setActions() {
-        closeButton = new Button("CLOSE", this, Window.DefaultFont);
+        closeButton = new Button("CLOSE", this, Window.DefaultFont,"Ctrl+Shift+X","");
         header.add(closeButton, BorderLayout.EAST);
     }
 
@@ -71,9 +71,22 @@ public class CodePanel extends JPanel implements ActionListener, KeyListener {
 
     public Icon getIcon() {
         String path = String.format("/assets/%sLogo.png", language);
-        URL url = Main.class.getResource(path);
-        if (url == null) return null;
-        return new ImageIcon(url);
+        return  FileSystem.getImage(path);
+    }
+
+    public String getDetails(){
+        return String.format("Name: %S Lines:%d Size:%dKB Language: %S ",name,getLines(),getSizeOfFile(),language);
+    }
+
+    private int getLines() {
+      return  FileSystem.getLineCount(path);
+    }
+
+    public File getFile(){
+        return new File(this.path);
+    }
+    private int getSizeOfFile() {
+    return FileSystem.getSize(path)/1024;
     }
 
     int locationIn(ArrayList<CodePanel> codePanelList) {
@@ -102,6 +115,7 @@ public class CodePanel extends JPanel implements ActionListener, KeyListener {
         return ((int) c) - 96;
     }
 
+    //SHORTCUT HANDLER
     @Override
     public void keyTyped(KeyEvent e) {
         if (!e.isControlDown()) return;
@@ -109,6 +123,8 @@ public class CodePanel extends JPanel implements ActionListener, KeyListener {
         if (e.isShiftDown()){
             if (code == getCtrlKeyCode('s')) {
                 Main.window.saveFileAs();
+            }else if (code == getCtrlKeyCode('x')){
+                Main.window.removeCurrentCodePanel();
             }
             return;
         }
@@ -125,16 +141,12 @@ public class CodePanel extends JPanel implements ActionListener, KeyListener {
         else if (code == getCtrlKeyCode('n')){
             Main.window.newFile();
         }
+
     }
 
 
     @Override
-    public void keyPressed(KeyEvent e) {
-
-    }
-
+    public void keyPressed(KeyEvent e) {}
     @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
+    public void keyReleased(KeyEvent e) {}
 }

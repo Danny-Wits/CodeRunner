@@ -1,19 +1,23 @@
 package org.codeRunner.GUI.Components;
 
 import org.codeRunner.GUI.Window;
+import org.codeRunner.run.FileSystem;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class Button extends JButton {
-     public Button(String text, ActionListener actionListener,Font font){
-         super(text);
-         this.addActionListener(actionListener);
-         this.setFont(font);
-         styleSetting();
-     }
-    public Button(String text, ActionListener actionListener){
+    public Button(String text, ActionListener actionListener, Font font, String tip, String iconPath) {
+        super(text);
+        this.setToolTipText(tip);
+        if (!iconPath.isEmpty()) this.setIcon(FileSystem.getImage(iconPath));
+        this.addActionListener(actionListener);
+        this.setFont(font);
+        styleSetting();
+    }
+
+    public Button(String text, ActionListener actionListener) {
         super(text);
         this.addActionListener(actionListener);
         this.setFont(Window.DefaultFont);

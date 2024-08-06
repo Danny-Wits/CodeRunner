@@ -1,20 +1,25 @@
 package org.codeRunner.GUI;
 
 import org.codeRunner.GUI.Components.Button;
+import org.codeRunner.GUI.Components.Label;
 import org.codeRunner.run.FileSystem;
 import org.codeRunner.run.Runner;
 import org.codeRunner.run.State;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Window extends JFrame implements ActionListener{
+public class Window extends JFrame implements ActionListener, ChangeListener {
     final int WIDTH = 1080;
     final int HEIGHT = 720;
     FileSelector fileSelector;
+    public Label currentFileInfo;
     public ErrorLog errorLog;
     Button newB;
     Button open;
@@ -23,21 +28,17 @@ public class Window extends JFrame implements ActionListener{
     Button run;
     ArrayList<CodePanel> codePanelList = new ArrayList<>();
     JTabbedPane codeTabs;
-    Color backGroundColor = Color.black;
+    Color backgroundColor = Color.black;
     public static final Font DefaultFont = new Font("DIGIFACE", Font.PLAIN, 16);
 
     public Window() {
         fileSelector = new FileSelector(this);
+        currentFileInfo=new Label("PLEASE OPEN A FILE",new Font(Font.DIALOG_INPUT,Font.BOLD,18));
+
         setWindow();
         errorLog = new ErrorLog();
         this.add(errorLog, BorderLayout.SOUTH);
-        newB = new Button("NEW", this, DefaultFont);
-        save = new Button("SAVE", this, DefaultFont);
-        saveAs = new Button("SAVE AS", this, DefaultFont);
-        open = new Button("OPEN", this, DefaultFont);
-        open.setToolTipText("Ctrl+O");
-        run = new Button("RUN", this, DefaultFont);
-        run.setToolTipText("Ctrl+R");
+        setButtons();
 
         setHeader();
         setCodeTab();
@@ -46,6 +47,8 @@ public class Window extends JFrame implements ActionListener{
         this.setVisible(true);
         saveCodePanelsOnExit();
     }
+
+
 
     private void loadCodePanels() {
         ArrayList<CodePanel> tempList = (ArrayList<CodePanel>)
@@ -75,6 +78,18 @@ public class Window extends JFrame implements ActionListener{
     }
 
     //GUI
+    private void setButtons() {
+        newB = new Button("NEW", this, DefaultFont,"Ctrl+N","/assets/newFile.png");
+
+        save = new Button("SAVE", this, DefaultFont,"Ctrl+S","/assets/saveFile.png");
+
+        saveAs = new Button("SAVE AS", this, DefaultFont,"Ctrl+Shift+S","/assets/saveFileAs.png");
+
+        open = new Button("OPEN", this, DefaultFont,"Ctrl+O","/assets/openFile.png");
+
+        run = new Button("RUN", this, DefaultFont,"Ctrl+R","/assets/runFile.png");
+    }
+
     private void setWindow() {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLayout(new BorderLayout());
@@ -87,19 +102,34 @@ public class Window extends JFrame implements ActionListener{
     }
 
     private void setHeader() {
-        JPanel head = new JPanel(new FlowLayout(FlowLayout.RIGHT), true);
-        head.setBackground(backGroundColor);
-        head.add(newB);
-        head.add(save);
-        head.add(saveAs);
-        head.add(open);
-        head.add(run);
+
+        JPanel head = new JPanel(new BorderLayout(),true);
+        head.setBackground(backgroundColor);
+        head.setBorder(new EmptyBorder(0,15,0,2));
+
+        JPanel leftHead=new JPanel();
+        leftHead.setLayout(new BoxLayout(leftHead,BoxLayout.X_AXIS));
+        leftHead.setBackground(backgroundColor);
+        currentFileInfo.setAlignmentY(Component.CENTER_ALIGNMENT);
+        leftHead.add(currentFileInfo);
+        head.add(leftHead,BorderLayout.CENTER);
+
+        JPanel rightHead = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        rightHead.setBackground(backgroundColor);
+        rightHead.add(newB);
+        rightHead.add(save);
+        rightHead.add(saveAs);
+        rightHead.add(open);
+        rightHead.add(run);
+        head.add(rightHead,BorderLayout.EAST);
+
         this.add(head, BorderLayout.NORTH);
     }
 
     private void setCodeTab() {
         codeTabs = new JTabbedPane();
         codeTabs.setFont(DefaultFont);
+        codeTabs.addChangeListener(this);
     }
 
     //Functionality
@@ -124,18 +154,19 @@ public class Window extends JFrame implements ActionListener{
         String path = fileSelector.saveFile();
         if (path != null) {
             FileSystem.createFile(path);
-            FileSystem.writeWhole(currentCodePanel().codeArea.getText(), path);
+            FileSystem.writeWhole(getCurrentCodePanel().codeArea.getText(), path);
         }
     }
 
     void saveFile() {
-        currentCodePanel().saveFile();
+        CodePanel current =getCurrentCodePanel();
+        current.saveFile();
+        currentFileInfo.setText(current.getDetails());
     }
 
     void run() {
         saveFile();
-        CodePanel codePanel = currentCodePanel();
-        String language = codePanel.language;
+        CodePanel codePanel = getCurrentCodePanel();
         String path = codePanel.path;
         runTask(path);
     }
@@ -162,8 +193,10 @@ public class Window extends JFrame implements ActionListener{
         codeTabs.remove(index);
     }
 
-    CodePanel currentCodePanel() {
-        return codePanelList.get(codeTabs.getSelectedIndex());
+    CodePanel getCurrentCodePanel() {
+        int index=codeTabs.getSelectedIndex();
+        if(index==-1)return null;
+        return codePanelList.get(index);
     }
 
     //User Input
@@ -182,11 +215,22 @@ public class Window extends JFrame implements ActionListener{
             newFile();
         }
     }
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        CodePanel current=getCurrentCodePanel();
+     if(current==null){
+         currentFileInfo.setText("PLEASE OPEN A FILE");
+     }
+     else{
+         currentFileInfo.setText(current.getDetails());
+     }
 
+    }
     public void runTask(String path) {
         Runner runner = new Runner(path);
         Thread runnerThread = new Thread(runner);
         runnerThread.start();
     }
+
 
 }

@@ -1,8 +1,11 @@
 package org.codeRunner.run;
 
 import org.codeRunner.GUI.CodePanel;
+import org.codeRunner.Main;
 
+import javax.swing.*;
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +18,28 @@ public class FileSystem {
     public static boolean isFile(String batPath) {
         File f = new File(batPath);
         return f.isFile();
+    }
+    public static int getSize(String path){
+        int size=-1;
+        File file = new File(path);
+        if (!file.isFile())return size;
+        size=(int)(file.length());
+        return size;
+    }
+    public static int getLineCount(String path){
+        File file= new File(path);
+        int lineCount=0;
+        if(!file.isFile())return lineCount;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            while (br.readLine()!=null)lineCount++;
+            br.close();
+            return lineCount;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
     public static String readWhole(String path) {
         File file = new File(path);
@@ -58,6 +83,12 @@ public class FileSystem {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static ImageIcon getImage(String path){
+        URL url = Main.class.getResource(path);
+        if (url == null) return null;
+        return new ImageIcon(url);
     }
 
     //StateManagement
