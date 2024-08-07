@@ -14,7 +14,6 @@ public class FileSelector extends JFileChooser {
          this.setCurrentDirectory(new File("./"));
          this.parent=parent;
          this.setPreferredSize(new Dimension(720,540));
-
          FileNameExtensionFilter filter = new FileNameExtensionFilter("Source Code ", Code.getAvailableLanguages());
          this.setFileFilter(filter);
      }

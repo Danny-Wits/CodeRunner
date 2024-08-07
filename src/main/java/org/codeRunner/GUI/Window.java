@@ -1,47 +1,44 @@
 package org.codeRunner.GUI;
 
-import org.codeRunner.GUI.Components.Button;
-import org.codeRunner.GUI.Components.Label;
+import org.codeRunner.GUI.Components.MenuItem;
 import org.codeRunner.run.FileSystem;
 import org.codeRunner.run.Runner;
 import org.codeRunner.run.State;
+
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Window extends JFrame implements ActionListener, ChangeListener {
+public class Window extends JFrame implements ActionListener, KeyListener {
     final int WIDTH = 1080;
     final int HEIGHT = 720;
     FileSelector fileSelector;
-    public Label currentFileInfo;
     public ErrorLog errorLog;
-    Button newB;
-    Button open;
-    Button saveAs;
-    Button save;
-    Button run;
+    JMenuBar menuBar;
+    JMenu fileMenu, editMenu, preferenceMenu;
+    MenuItem newB, open, saveAs, save, rename, move, theme;
     ArrayList<CodePanel> codePanelList = new ArrayList<>();
     JTabbedPane codeTabs;
-    Color backgroundColor = Color.black;
     public static final Font DefaultFont = new Font("DIGIFACE", Font.PLAIN, 16);
-
+    public static State state = FileSystem.loadState();
+    public static Window currentWindow;
     public Window() {
+        currentWindow=this;
         fileSelector = new FileSelector(this);
-        currentFileInfo=new Label("PLEASE OPEN A FILE",new Font(Font.DIALOG_INPUT,Font.BOLD,18));
+        menuBar = new JMenuBar();
+        ThemeEditor.setTheme(this, state.preferredThemeIndex);
 
+        setMenuButtons();
         setWindow();
+
         errorLog = new ErrorLog();
         this.add(errorLog, BorderLayout.SOUTH);
-        setButtons();
 
-        setHeader();
         setCodeTab();
+
         this.add(codeTabs);
         loadCodePanels();
         this.setVisible(true);
@@ -49,11 +46,9 @@ public class Window extends JFrame implements ActionListener, ChangeListener {
     }
 
 
-
     private void loadCodePanels() {
-        ArrayList<CodePanel> tempList = (ArrayList<CodePanel>)
-                FileSystem.loadState()
-                        .paths.stream()
+        ArrayList<CodePanel> tempList =
+                state.paths.stream()
                         .map(CodePanel::new)
                         .collect(Collectors.toCollection(ArrayList::new));
         tempList.forEach(this::addCodePanel);
@@ -63,7 +58,7 @@ public class Window extends JFrame implements ActionListener, ChangeListener {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                State state = FileSystem.createState(codePanelList);
+                State state = FileSystem.createState(codePanelList, ThemeEditor.currentLookAndFeelIndex);
                 codePanelList.forEach(CodePanel::saveFile);
                 FileSystem.saveState(state);
                 super.windowClosing(e);
@@ -72,22 +67,43 @@ public class Window extends JFrame implements ActionListener, ChangeListener {
 
     }
 
-
     public void reRender() {
+
         this.repaint();
     }
 
     //GUI
-    private void setButtons() {
-        newB = new Button("NEW", this, DefaultFont,"Ctrl+N","/assets/newFile.png");
+    private void setMenuButtons() {
+        newB = new MenuItem("New", this, DefaultFont, "Ctrl+N", "/assets/newFile.png");
 
-        save = new Button("SAVE", this, DefaultFont,"Ctrl+S","/assets/saveFile.png");
+        save = new MenuItem("Save", this, DefaultFont, "Ctrl+S", "/assets/saveFile.png");
 
-        saveAs = new Button("SAVE AS", this, DefaultFont,"Ctrl+Shift+S","/assets/saveFileAs.png");
+        saveAs = new MenuItem("Save as", this, DefaultFont, "Ctrl+Shift+S", "/assets/saveFileAs.png");
 
-        open = new Button("OPEN", this, DefaultFont,"Ctrl+O","/assets/openFile.png");
+        open = new MenuItem("Open", this, DefaultFont, "Ctrl+O", "/assets/openFile.png");
 
-        run = new Button("RUN", this, DefaultFont,"Ctrl+R","/assets/runFile.png");
+        rename = new MenuItem("Rename", this, DefaultFont, "Ctrl+Shift+R", "/assets/renameFile.png");
+
+        move = new MenuItem("Move", this, DefaultFont, "Ctrl+M", "/assets/moveFile.png");
+
+        theme = new MenuItem("Theme", this, DefaultFont, "Ctrl+T", "/assets/moveFile.png");
+
+        fileMenu = new JMenu("FILE");
+        fileMenu.add(newB);
+        fileMenu.add(save);
+        fileMenu.add(saveAs);
+        fileMenu.add(open);
+
+        editMenu = new JMenu("EDIT");
+        editMenu.add(rename);
+        editMenu.add(move);
+
+        preferenceMenu = new JMenu("PREFERENCES");
+        preferenceMenu.add(theme);
+
+        menuBar.add(fileMenu);
+        menuBar.add(editMenu);
+        menuBar.add(preferenceMenu);
     }
 
     private void setWindow() {
@@ -96,40 +112,16 @@ public class Window extends JFrame implements ActionListener, ChangeListener {
         this.setBounds(100, 50, WIDTH, HEIGHT);
         this.setBackground(Color.black);
         this.setTitle("CODE RUNNER");
+        this.setJMenuBar(menuBar);
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/assets/icon.png")));
         this.setIconImage(icon.getImage());
         this.setBackground(Color.DARK_GRAY);
     }
 
-    private void setHeader() {
-
-        JPanel head = new JPanel(new BorderLayout(),true);
-        head.setBackground(backgroundColor);
-        head.setBorder(new EmptyBorder(0,15,0,2));
-
-        JPanel leftHead=new JPanel();
-        leftHead.setLayout(new BoxLayout(leftHead,BoxLayout.X_AXIS));
-        leftHead.setBackground(backgroundColor);
-        currentFileInfo.setAlignmentY(Component.CENTER_ALIGNMENT);
-        leftHead.add(currentFileInfo);
-        head.add(leftHead,BorderLayout.CENTER);
-
-        JPanel rightHead = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        rightHead.setBackground(backgroundColor);
-        rightHead.add(newB);
-        rightHead.add(save);
-        rightHead.add(saveAs);
-        rightHead.add(open);
-        rightHead.add(run);
-        head.add(rightHead,BorderLayout.EAST);
-
-        this.add(head, BorderLayout.NORTH);
-    }
-
     private void setCodeTab() {
         codeTabs = new JTabbedPane();
         codeTabs.setFont(DefaultFont);
-        codeTabs.addChangeListener(this);
+        codeTabs.setFocusable(false);
     }
 
     //Functionality
@@ -159,9 +151,18 @@ public class Window extends JFrame implements ActionListener, ChangeListener {
     }
 
     void saveFile() {
-        CodePanel current =getCurrentCodePanel();
+        CodePanel current = getCurrentCodePanel();
         current.saveFile();
-        currentFileInfo.setText(current.getDetails());
+    }
+
+    void renameFile() {
+        String newName = input("ENTER NEW NAME WITHOUT EXTENSION:").trim();
+        getCurrentCodePanel().renameFile(newName);
+    }
+
+    void moveFile() {
+        String newPath = fileSelector.saveFile();
+        getCurrentCodePanel().moveFile(newPath);
     }
 
     void run() {
@@ -169,6 +170,26 @@ public class Window extends JFrame implements ActionListener, ChangeListener {
         CodePanel codePanel = getCurrentCodePanel();
         String path = codePanel.path;
         runTask(path);
+    }
+
+    void changeTheme() {
+
+        ThemeEditor.changeThemePrompt(this);
+    }
+
+    //IO
+    String input(String prompt) {
+        String name = JOptionPane.showInputDialog(this, prompt);
+        if (name == null) name = "";
+        return name;
+    }
+
+    void Message(String message, boolean flag) {
+        if (flag) Message(message);
+    }
+
+    void Message(String message) {
+        JOptionPane.showMessageDialog(this, message, "INFOMATION", JOptionPane.INFORMATION_MESSAGE);
     }
 
 
@@ -194,8 +215,8 @@ public class Window extends JFrame implements ActionListener, ChangeListener {
     }
 
     CodePanel getCurrentCodePanel() {
-        int index=codeTabs.getSelectedIndex();
-        if(index==-1)return null;
+        int index = codeTabs.getSelectedIndex();
+        if (index == -1) return null;
         return codePanelList.get(index);
     }
 
@@ -209,23 +230,64 @@ public class Window extends JFrame implements ActionListener, ChangeListener {
             saveFileAs();
         } else if (eventTrigger == save) {
             saveFile();
-        } else if (eventTrigger == run) {
-            run();
         } else if (eventTrigger == newB) {
             newFile();
+        } else if (eventTrigger == rename) {
+            renameFile();
+        } else if (eventTrigger == move) {
+            moveFile();
+        } else if (eventTrigger == theme) {
+            changeTheme();
         }
     }
+
+    public int getCtrlKeyCode(Character c) {
+        return ((int) c) - 96;
+    }
+
+
+    //SHORTCUT HANDLER
     @Override
-    public void stateChanged(ChangeEvent e) {
-        CodePanel current=getCurrentCodePanel();
-     if(current==null){
-         currentFileInfo.setText("PLEASE OPEN A FILE");
-     }
-     else{
-         currentFileInfo.setText(current.getDetails());
-     }
+    public void keyTyped(KeyEvent e) {
+        if (!e.isControlDown()) return;
+        int code = (int) e.getKeyChar();
+        if (e.isShiftDown()) {
+            if (code == getCtrlKeyCode('s')) {
+                saveFileAs();
+            } else if (code == getCtrlKeyCode('x')) {
+                removeCurrentCodePanel();
+            } else if (code == getCtrlKeyCode('r')) {
+                renameFile();
+            }
+            return;
+        }
+        if (code == getCtrlKeyCode('r')) {
+            run();
+        } else if (code == getCtrlKeyCode('s')) {
+            saveFile();
+        } else if (code == getCtrlKeyCode('o')) {
+            openFile();
+        } else if (code == getCtrlKeyCode('m')) {
+            moveFile();
+        } else if (code == getCtrlKeyCode('n')) {
+            newFile();
+        } else if (code == getCtrlKeyCode('t')) {
+            changeTheme();
+            System.out.println("changetheme");
+        }
 
     }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+    }
+
+    //UPDATE HANDLER
+    @Override
+    public void keyReleased(KeyEvent e) {
+        getCurrentCodePanel().reloadHeader();
+    }
+
     public void runTask(String path) {
         Runner runner = new Runner(path);
         Thread runnerThread = new Thread(runner);

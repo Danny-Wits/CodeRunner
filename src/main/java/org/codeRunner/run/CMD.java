@@ -1,6 +1,6 @@
 package org.codeRunner.run;
 
-import org.codeRunner.Main;
+import org.codeRunner.GUI.Window;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -36,7 +36,7 @@ public class CMD {
             }
             log.add(output.toString());
             log.add(error.toString());
-            if(!error.toString().isEmpty())Main.window.errorLog.setError(error.toString());
+            if(!error.toString().isEmpty()) Window.currentWindow.errorLog.setError(error.toString());
             return log;
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -21,6 +21,7 @@ public class Code {
             return this.Extension;
         }
     }
+
     public static String[] getAvailableLanguages(){
         ArrayList<String>languageList=new ArrayList<>();
         Arrays.stream(LANGUAGES.values()).forEach(e->languageList.add(e.Extension));
@@ -86,7 +87,7 @@ public class Code {
         return new String[]{path.substring(limit + 1), path.substring(0, limit)};
     }
 
-    static String getParentFolder(String path) {
+    public static String getParentFolder(String path) {
         int limit = 0;
         for (int i = path.length() - 1; i >= 0; i--) {
             if (path.charAt(i) == '\\' || path.charAt(i) == '/') {

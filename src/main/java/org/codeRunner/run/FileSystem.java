@@ -12,35 +12,52 @@ import java.util.stream.Collectors;
 
 public class FileSystem {
     //User Dir
-    static final String homeDir=System.getProperty("user.home");
-    static final String serFilePath =homeDir+"/savedState.ser";
+    static final String homeDir = System.getProperty("user.home");
+    static final String serFilePath = homeDir + "/savedState.ser";
+
     //FILE IO
     public static boolean isFile(String batPath) {
         File f = new File(batPath);
         return f.isFile();
     }
-    public static int getSize(String path){
-        int size=-1;
+
+    public static int getSize(String path) {
+        int size = -1;
         File file = new File(path);
-        if (!file.isFile())return size;
-        size=(int)(file.length());
+        if (!file.isFile()) return size;
+        size = (int) (file.length());
         return size;
     }
-    public static int getLineCount(String path){
-        File file= new File(path);
-        int lineCount=0;
-        if(!file.isFile())return lineCount;
+
+    public static Boolean move(String source, String target) {
+        File sourceFile = new File(source);
+        File targetFile = new File(target);
+        if (!sourceFile.isFile() || targetFile.isFile()) {
+            return false;
+        }
+        return sourceFile.renameTo(targetFile);
+
+    }
+
+    public static int getLineCountInFile(String path) {
+        File file = new File(path);
+        int lineCount = 0;
+        if (!file.isFile()) return lineCount;
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
-            while (br.readLine()!=null)lineCount++;
+            while (br.readLine() != null) lineCount++;
             br.close();
             return lineCount;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
+
+    public static int getLineCountInString(String text) {
+
+        return (int) text.lines().count();
+    }
+
     public static String readWhole(String path) {
         File file = new File(path);
         StringBuilder code = new StringBuilder();
@@ -85,16 +102,19 @@ public class FileSystem {
         }
     }
 
-    public static ImageIcon getImage(String path){
+    public static ImageIcon getImage(String path) {
         URL url = Main.class.getResource(path);
-        if (url == null) return null;
+        if (url == null) {
+            System.out.println("IMAGE NOT FOUND");
+            return null;
+        }
         return new ImageIcon(url);
     }
 
     //StateManagement
-    public static State createState(List<CodePanel> list) {
+    public static State createState(List<CodePanel> list,int themeIndex) {
         System.out.println("Creating State");
-        return new State(list.stream().map(e -> e.path).collect(Collectors.toList()));
+        return new State(list.stream().map(e -> e.path).collect(Collectors.toList()),themeIndex);
     }
 
     public static void saveState(State state) {
@@ -113,7 +133,7 @@ public class FileSystem {
     public static State loadState() {
         System.out.println("Loading State");
         File serFile = new File(serFilePath);
-        if(!serFile.isFile())return new State(new ArrayList<>());
+        if (!serFile.isFile()) return new State(new ArrayList<>(),2);
         try {
             FileInputStream file = new FileInputStream(serFilePath);
             ObjectInputStream outputStream = new ObjectInputStream(file);
@@ -122,9 +142,10 @@ public class FileSystem {
             file.close();
             return state;
         } catch (FileNotFoundException e) {
-            return new State(new ArrayList<String>());
+            return new State(new ArrayList<String>(),2);
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            saveState(createState(new ArrayList<>(),2));
+            return new State(new ArrayList<String>(),2);
         }
     }
 

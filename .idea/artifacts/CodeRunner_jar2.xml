@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CodeRunner:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/CodeRunner_jar2</output-path>
+    <root id="archive" name="CodeRunner.jar">
+      <element id="module-output" name="CodeRunner" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/formdev/flatlaf/3.5.1/flatlaf-3.5.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

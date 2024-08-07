@@ -1,6 +1,5 @@
 package org.codeRunner.GUI.Components;
 
-import org.codeRunner.GUI.Window;
 import org.codeRunner.run.FileSystem;
 
 import javax.swing.*;
@@ -13,21 +12,18 @@ public class Button extends JButton {
         this.setToolTipText(tip);
         if (!iconPath.isEmpty()) this.setIcon(FileSystem.getImage(iconPath));
         this.addActionListener(actionListener);
-        this.setFont(font);
+        //this.setFont(font);
         styleSetting();
     }
 
     public Button(String text, ActionListener actionListener) {
         super(text);
         this.addActionListener(actionListener);
-        this.setFont(Window.DefaultFont);
+       // this.setFont(Window.DefaultFont);
         styleSetting();
     }
 
     private void styleSetting() {
         this.setFocusable(false);
-        this.setBackground(Color.BLACK);
-        this.setForeground(Color.WHITE);
-
     }
 }
