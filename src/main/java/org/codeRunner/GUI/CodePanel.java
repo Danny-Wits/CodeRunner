@@ -114,6 +114,7 @@ public class CodePanel extends JPanel implements ActionListener {
             return;
         }
         String newPath = Code.getParentFolder(path) + newName +"."+ Code.getExtension(path)[0];
+
         if (newPath.equals(path)) return;
         System.out.println(newPath);
         FileSystem.move(path, newPath);
@@ -122,6 +123,7 @@ public class CodePanel extends JPanel implements ActionListener {
     }
 
     public void moveFile(String newPath) {
+        if(newPath==null)return;
         if (newPath.equals(path)) return;
         System.out.println(newPath);
         FileSystem.move(path, newPath);

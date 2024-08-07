@@ -9,28 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8450b6e2-bb5b-49cb-90ed-69c5d7432f67" name="Changes" comment="added current file information label">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/CodeRunner_jar2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/MenuItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/ThemeEditor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/renameFile.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/CodeRunner_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/CodeRunner_jar.xml" afterDir="false" />
+    <list default="true" id="8450b6e2-bb5b-49cb-90ed-69c5d7432f67" name="Changes" comment="added themes and improved">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar/CodeRunner.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar/CodeRunner.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/CodePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/CodePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/Button.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/FileSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/FileSelector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/CMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/CMD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Code.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Code.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/FileSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/FileSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/State.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/cLogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/cLogo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/cppLogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/cppLogo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/javaLogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/javaLogo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/pyLogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/pyLogo.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,34 +58,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.CMD.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Code.executor&quot;: &quot;Run&quot;,
-    &quot;Application.FileSystem.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
-    &quot;JAR Application.CJar.executor&quot;: &quot;Run&quot;,
-    &quot;JAR Application.CRJAR.executor&quot;: &quot;Run&quot;,
-    &quot;OverrideImplement.generate.javadoc&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/danny/OneDrive/Desktop/java/CodeRunner/out/artifacts/CodeRunner_jar2/CodeRunner.jar&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/danny/OneDrive/Desktop/java/CodeRunner/src/main/java/org/codeRunner/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;build.tools&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.CMD.executor": "Run",
+    "Application.Code.executor": "Run",
+    "Application.FileSystem.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.Window.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "true",
+    "JAR Application.CJar.executor": "Run",
+    "JAR Application.CRJAR.executor": "Run",
+    "OverrideImplement.generate.javadoc": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "full.screen.before.presentation.mode": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/danny/OneDrive/Desktop/java/CodeRunner/out/artifacts/CodeRunner_jar2/CodeRunner.jar",
+    "onboarding.tips.debug.path": "C:/Users/danny/OneDrive/Desktop/java/CodeRunner/src/main/java/org/codeRunner/Main.java",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "build.tools"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="org.codeRunner.GUI" />
@@ -172,6 +157,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Window" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.codeRunner.GUI.Window" />
+      <module name="CodeRunner" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.codeRunner.GUI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CJar" type="JarApplication" singleton="false">
       <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/CodeRunner_jar/CodeRunner.jar" />
       <option name="WORKING_DIRECTORY" value="C:\Users\danny\OneDrive\Desktop\java\CodeRunner" />
@@ -193,6 +191,7 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.Window" />
       <item itemvalue="Application.FileSystem" />
       <item itemvalue="Application.CMD" />
       <item itemvalue="Application.Code" />
@@ -202,6 +201,7 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Window" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Code" />
         <item itemvalue="Application.FileSystem" />
@@ -282,7 +282,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722967183288</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="added themes and improved">
+      <option name="closed" value="true" />
+      <created>1723060757523</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1723060757524</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -305,6 +313,7 @@
     <MESSAGE value="fixed logo" />
     <MESSAGE value="added Python support and some keyboard shortcuts" />
     <MESSAGE value="added current file information label" />
-    <option name="LAST_COMMIT_MESSAGE" value="added current file information label" />
+    <MESSAGE value="added themes and improved" />
+    <option name="LAST_COMMIT_MESSAGE" value="added themes and improved" />
   </component>
 </project>

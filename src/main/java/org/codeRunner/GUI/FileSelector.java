@@ -17,7 +17,8 @@ public class FileSelector extends JFileChooser {
          FileNameExtensionFilter filter = new FileNameExtensionFilter("Source Code ", Code.getAvailableLanguages());
          this.setFileFilter(filter);
      }
-     public String getFile(){
+     public String getFile(String title){
+         this.setDialogTitle(title);
          int returnStatus = this.showOpenDialog(this.parent);
          if(returnStatus==JFileChooser.APPROVE_OPTION){
              File selectedFile=this.getSelectedFile();
@@ -25,7 +26,8 @@ public class FileSelector extends JFileChooser {
          }
          return null;
      }
-    public String saveFile(){
+    public String saveFile(String title){
+        this.setDialogTitle(title);
         int returnStatus = this.showSaveDialog(this.parent);
         if(returnStatus==JFileChooser.APPROVE_OPTION){
             File selectedFile=this.getSelectedFile();

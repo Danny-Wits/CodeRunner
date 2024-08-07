@@ -84,7 +84,7 @@ public class Window extends JFrame implements ActionListener, KeyListener {
 
         rename = new MenuItem("Rename", this, DefaultFont, "Ctrl+Shift+R", "/assets/renameFile.png");
 
-        move = new MenuItem("Move", this, DefaultFont, "Ctrl+M", "/assets/moveFile.png");
+        move = new MenuItem("Move", this, DefaultFont, "Ctrl+Q", "/assets/moveFile.png");
 
         theme = new MenuItem("Theme", this, DefaultFont, "Ctrl+T", "/assets/moveFile.png");
 
@@ -126,7 +126,7 @@ public class Window extends JFrame implements ActionListener, KeyListener {
 
     //Functionality
     void newFile() {
-        String path = fileSelector.saveFile();
+        String path = fileSelector.saveFile("New File");
         if (path != null) {
             FileSystem.createFile(path);
             CodePanel codePanel = new CodePanel(path);
@@ -135,7 +135,7 @@ public class Window extends JFrame implements ActionListener, KeyListener {
     }
 
     void openFile() {
-        String path = fileSelector.getFile();
+        String path = fileSelector.getFile("Open File");
         if (path != null) {
             CodePanel codePanel = new CodePanel(path);
             addCodePanel(codePanel);
@@ -143,7 +143,7 @@ public class Window extends JFrame implements ActionListener, KeyListener {
     }
 
     void saveFileAs() {
-        String path = fileSelector.saveFile();
+        String path = fileSelector.saveFile("Save File As");
         if (path != null) {
             FileSystem.createFile(path);
             FileSystem.writeWhole(getCurrentCodePanel().codeArea.getText(), path);
@@ -161,7 +161,7 @@ public class Window extends JFrame implements ActionListener, KeyListener {
     }
 
     void moveFile() {
-        String newPath = fileSelector.saveFile();
+        String newPath = fileSelector.saveFile("Move File");
         getCurrentCodePanel().moveFile(newPath);
     }
 
@@ -224,6 +224,7 @@ public class Window extends JFrame implements ActionListener, KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         var eventTrigger = e.getSource();
+
         if (eventTrigger == open) {
             openFile();
         } else if (eventTrigger == saveAs) {
@@ -241,7 +242,7 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         }
     }
 
-    public int getCtrlKeyCode(Character c) {
+    public static int getCtrlKeyCode(Character c) {
         return ((int) c) - 96;
     }
 
@@ -251,6 +252,7 @@ public class Window extends JFrame implements ActionListener, KeyListener {
     public void keyTyped(KeyEvent e) {
         if (!e.isControlDown()) return;
         int code = (int) e.getKeyChar();
+        System.out.println(code);
         if (e.isShiftDown()) {
             if (code == getCtrlKeyCode('s')) {
                 saveFileAs();
@@ -267,15 +269,13 @@ public class Window extends JFrame implements ActionListener, KeyListener {
             saveFile();
         } else if (code == getCtrlKeyCode('o')) {
             openFile();
-        } else if (code == getCtrlKeyCode('m')) {
+        } else if (code == getCtrlKeyCode('q')) {
             moveFile();
         } else if (code == getCtrlKeyCode('n')) {
             newFile();
         } else if (code == getCtrlKeyCode('t')) {
             changeTheme();
-            System.out.println("changetheme");
         }
-
     }
 
     @Override
