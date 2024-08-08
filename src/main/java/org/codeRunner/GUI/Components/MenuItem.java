@@ -10,7 +10,7 @@ public class MenuItem extends JMenuItem {
         super(text);
         // this.setFont(font);
         this.addActionListener(actionListener);
-        //this.setIcon(FileSystem.getImage(iconPath));
+        //this.setIcon(FileSystem.getImageIcon(iconPath));
         this.setToolTipText(tip);
     }
 }

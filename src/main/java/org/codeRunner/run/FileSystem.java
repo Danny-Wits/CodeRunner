@@ -102,12 +102,14 @@ public class FileSystem {
         }
     }
 
-    public static ImageIcon getImage(String path) {
+    public static ImageIcon getImageIcon(String path) {
         URL url = Main.class.getResource(path);
         if (url == null) {
             System.out.println("IMAGE NOT FOUND");
             return null;
         }
+//        ImageIcon imageIcon=
+//        imageIcon=new ImageIcon(imageIcon.getImage().getScaledInstance(24,24, Image.SCALE_SMOOTH));
         return new ImageIcon(url);
     }
 

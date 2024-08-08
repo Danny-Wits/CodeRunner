@@ -10,7 +10,7 @@ public class Button extends JButton {
     public Button(String text, ActionListener actionListener, Font font, String tip, String iconPath) {
         super(text);
         this.setToolTipText(tip);
-        if (!iconPath.isEmpty()) this.setIcon(FileSystem.getImage(iconPath));
+        if (!iconPath.isEmpty()) this.setIcon(FileSystem.getImageIcon(iconPath));
         this.addActionListener(actionListener);
         //this.setFont(font);
         styleSetting();

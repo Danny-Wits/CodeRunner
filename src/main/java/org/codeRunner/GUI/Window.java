@@ -25,8 +25,9 @@ public class Window extends JFrame implements ActionListener, KeyListener {
     public static final Font DefaultFont = new Font("DIGIFACE", Font.PLAIN, 16);
     public static State state = FileSystem.loadState();
     public static Window currentWindow;
+
     public Window() {
-        currentWindow=this;
+        currentWindow = this;
         fileSelector = new FileSelector(this);
         menuBar = new JMenuBar();
         ThemeEditor.setTheme(this, state.preferredThemeIndex);
@@ -173,8 +174,21 @@ public class Window extends JFrame implements ActionListener, KeyListener {
     }
 
     void changeTheme() {
-
         ThemeEditor.changeThemePrompt(this);
+        codePanelList.forEach(CodePanel::reload);
+
+    }
+
+    void undo() {
+        CodePanel codePanel = getCurrentCodePanel();
+        if (codePanel == null) return;
+        if (codePanel.undoManager.canUndo()) codePanel.undoManager.undo();
+    }
+
+    void redo() {
+        CodePanel codePanel = getCurrentCodePanel();
+        if (codePanel == null) return;
+        if (codePanel.undoManager.canRedo()) codePanel.undoManager.redo();
     }
 
     //IO
@@ -252,7 +266,6 @@ public class Window extends JFrame implements ActionListener, KeyListener {
     public void keyTyped(KeyEvent e) {
         if (!e.isControlDown()) return;
         int code = (int) e.getKeyChar();
-        System.out.println(code);
         if (e.isShiftDown()) {
             if (code == getCtrlKeyCode('s')) {
                 saveFileAs();
@@ -275,6 +288,10 @@ public class Window extends JFrame implements ActionListener, KeyListener {
             newFile();
         } else if (code == getCtrlKeyCode('t')) {
             changeTheme();
+        } else if (code == getCtrlKeyCode('z')) {
+            undo();
+        } else if (code == getCtrlKeyCode('y')) {
+            redo();
         }
     }
 
@@ -282,10 +299,12 @@ public class Window extends JFrame implements ActionListener, KeyListener {
     public void keyPressed(KeyEvent e) {
     }
 
-    //UPDATE HANDLER
     @Override
     public void keyReleased(KeyEvent e) {
-        getCurrentCodePanel().reloadHeader();
+       CodePanel current= getCurrentCodePanel();
+      if(current!=null){
+          current.reload();
+      }
     }
 
     public void runTask(String path) {

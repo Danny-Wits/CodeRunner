@@ -27,9 +27,13 @@ public final class ErrorLog extends JPanel implements ActionListener {
 
         JPanel buttonHolder = new JPanel();
         buttonHolder.setLayout(new BoxLayout(buttonHolder, BoxLayout.Y_AXIS));
-        buttonHolder.setBackground(Color.WHITE);
         clear = new Button("CLEAR", this);
+        clear.setAlignmentX(Container.CENTER_ALIGNMENT);
+
         close = new Button("CLOSE", this);
+        close.setAlignmentX(Container.CENTER_ALIGNMENT);
+
+
         buttonHolder.add(clear);
         buttonHolder.add(close);
         this.add(buttonHolder, BorderLayout.EAST);

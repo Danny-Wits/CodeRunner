@@ -3,9 +3,12 @@ package org.codeRunner.GUI;
 import org.codeRunner.GUI.Components.Button;
 import org.codeRunner.run.Code;
 import org.codeRunner.run.FileSystem;
+import org.codeRunner.run.SyntaxHL;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.StyledDocument;
+import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,12 +16,15 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class CodePanel extends JPanel implements ActionListener {
-    public JTextArea codeArea;
-    public String language;
+    JTextPane codeArea;
+    StyledDocument codeAreaDoc;
+    SyntaxHL syntaxHighLighter;
+    UndoManager undoManager;
+    String language;
     public String path;
-    public String name;
+    String name;
     JPanel header;
-    public JLabel headerLabel;
+    JLabel headerLabel;
     Button runButton;
     Button closeButton;
 
@@ -35,7 +41,8 @@ public class CodePanel extends JPanel implements ActionListener {
     }
 
     private void setDetails(String path) {
-        this.codeArea = new JTextArea(FileSystem.readWhole(path));
+        this.codeArea = new JTextPane();
+        this.codeArea.setText(FileSystem.readWhole(path));
         this.language = Code.getExtension(path)[0];
         this.path = path;
         this.name = Code.getFileName(path);
@@ -58,14 +65,17 @@ public class CodePanel extends JPanel implements ActionListener {
     }
 
     private void setCodeArea() {
-        //codeArea.setBackground(Color.BLACK);
-        //codeArea.setForeground(Color.GREEN);
         codeArea.addKeyListener(Window.currentWindow);
         codeArea.setBorder(new EmptyBorder(10, 20, 1, 10));
         codeArea.setSize(this.getWidth(), 700);
         codeArea.setFont(new Font("Bahnschrift", Font.PLAIN, 18));
-        //codeArea.setCaretColor(Color.cyan);
         codeArea.setCaretPosition(0);
+        codeArea.getText();
+        codeAreaDoc=codeArea.getStyledDocument();
+        undoManager=new UndoManager();
+        codeAreaDoc.addUndoableEditListener(undoManager);
+        syntaxHighLighter=new SyntaxHL(this,codeAreaDoc,language);
+        syntaxHighLighter.highLight();
         JScrollPane scrollPane = new JScrollPane(codeArea);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -79,7 +89,7 @@ public class CodePanel extends JPanel implements ActionListener {
 
     public Icon getIcon() {
         String path = String.format("/assets/%sLogo.png", language);
-        return FileSystem.getImage(path);
+        return FileSystem.getImageIcon(path);
     }
 
     public String getDetails() {
@@ -103,7 +113,7 @@ public class CodePanel extends JPanel implements ActionListener {
 
     //FILE MANAGEMENT
     public void saveFile() {
-        reloadHeader();
+        reload();
         FileSystem.writeWhole(getText(), this.path);
     }
 
@@ -151,10 +161,10 @@ public class CodePanel extends JPanel implements ActionListener {
             Window.currentWindow.removeCurrentCodePanel();
         }
     }
-
-
-
-    void reloadHeader() {
+    public void reload() {
         headerLabel.setText(getDetails());
+        syntaxHighLighter.highLight();
     }
+
+
 }
