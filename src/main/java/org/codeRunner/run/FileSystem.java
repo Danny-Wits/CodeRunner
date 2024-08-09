@@ -3,7 +3,10 @@ package org.codeRunner.run;
 import org.codeRunner.Main;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 public class FileSystem {
@@ -142,5 +145,13 @@ public class FileSystem {
         }
     }
 
+    //Browser
+    public static void goToUrl(String URL){
+        try {
+            Desktop.getDesktop().browse(new URI(URL));
+        } catch (IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

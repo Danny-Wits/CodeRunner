@@ -3,27 +3,22 @@ package org.codeRunner.run;
 import org.codeRunner.GUI.CodePanel;
 
 import javax.swing.*;
-import javax.swing.text.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
-import java.util.List;
 
 public class SyntaxHL{
     StyledDocument document;
-    String language;
+    Language language;
     CodePanel parent;
-    List<String>keywords;
-    Color keywordColor;
 
-    public SyntaxHL(CodePanel parent,StyledDocument document,String language){
+    public SyntaxHL(CodePanel parent,StyledDocument document,Language language){
         this.document=document;
         this.language=language;
         this.parent=parent;
-        switch (language){
-            case "c"-> {keywords=Language.C.keywords;}
-            case "cpp"-> {keywords=Language.CPP.keywords;}
-            case "java"-> {keywords=Language.Java.keywords;}
-            case "py"-> {keywords=Language.Python.keywords;}
-        }
+
     }
     public void highLight(){
         String text = getText();
@@ -40,17 +35,17 @@ public class SyntaxHL{
             length=s.length();
             pos=text.indexOf(s,pos);
             if(s.matches(pattern)){
-                document.setCharacterAttributes(pos,length,getStyle(Color.orange),true);
+                document.setCharacterAttributes(pos,length,getStyle(language.keywordColor),true);
             }else{
                 document.setCharacterAttributes(pos,length,getStyle(DefaultColor),true);
-            };
+            }
             pos+=length;
         }
     }
 
     String getPattern() {
         StringBuilder pattern =new StringBuilder();
-        keywords.forEach(e->{
+        language.keywords.forEach(e->{
             pattern.append("\\b").append(e).append("\\b").append("|");
         });
         return pattern.toString();
@@ -72,7 +67,5 @@ public class SyntaxHL{
         return text;
     }
 
-    public void setKeywordColor(Color keywordColor) {
-        this.keywordColor = keywordColor;
-    }
+
 }

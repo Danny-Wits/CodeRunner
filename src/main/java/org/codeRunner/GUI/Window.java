@@ -1,10 +1,7 @@
 package org.codeRunner.GUI;
 
 import org.codeRunner.GUI.Components.MenuItem;
-import org.codeRunner.run.FileSystem;
-import org.codeRunner.run.Runner;
-import org.codeRunner.run.Setting;
-import org.codeRunner.run.State;
+import org.codeRunner.run.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,12 +13,11 @@ import java.util.stream.Collectors;
 public class Window extends JFrame implements ActionListener, KeyListener {
     final int WIDTH = 1080;
     final int HEIGHT = 720;
-    public Setting currentSettings;
     FileSelector fileSelector;
     public ErrorLog errorLog;
     JMenuBar menuBar;
-    JMenu fileMenu, editMenu, preferenceMenu;
-    MenuItem newB, open, saveAs, save, rename, move, theme;
+    JMenu fileMenu, editMenu, settingMemu, preferenceMenu;
+    MenuItem newB, open, saveAs, save, rename, move, theme, language, undo, redo;
     public ArrayList<CodePanel> codePanelList = new ArrayList<>();
     public JTabbedPane codeTabs;
     public static final Font DefaultFont = new Font("DIGIFACE", Font.PLAIN, 16);
@@ -80,18 +76,19 @@ public class Window extends JFrame implements ActionListener, KeyListener {
     //GUI
     private void setMenuButtons() {
         newB = new MenuItem("New", this, DefaultFont, "Ctrl+N", "/assets/newFile.png");
-
         save = new MenuItem("Save", this, DefaultFont, "Ctrl+S", "/assets/saveFile.png");
-
         saveAs = new MenuItem("Save as", this, DefaultFont, "Ctrl+Shift+S", "/assets/saveFileAs.png");
-
         open = new MenuItem("Open", this, DefaultFont, "Ctrl+O", "/assets/openFile.png");
 
         rename = new MenuItem("Rename", this, DefaultFont, "Ctrl+Shift+R", "/assets/renameFile.png");
-
         move = new MenuItem("Move", this, DefaultFont, "Ctrl+Q", "/assets/moveFile.png");
+        undo = new MenuItem("Undo", this, DefaultFont, "Ctrl+Z", "/assets/moveFile.png");
+        redo = new MenuItem("Redo", this, DefaultFont, "Ctrl+Y", "/assets/moveFile.png");
+
+        language = new MenuItem("Language", this, DefaultFont, "Language Setting", "/assets/moveFile.png");
 
         theme = new MenuItem("Theme", this, DefaultFont, "Ctrl+T", "/assets/moveFile.png");
+
 
         fileMenu = new JMenu("FILE");
         fileMenu.add(newB);
@@ -102,12 +99,17 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         editMenu = new JMenu("EDIT");
         editMenu.add(rename);
         editMenu.add(move);
+        editMenu.add(undo);
+        editMenu.add(redo);
 
         preferenceMenu = new JMenu("PREFERENCES");
         preferenceMenu.add(theme);
 
+        settingMemu = new JMenu("SETTING");
+        settingMemu.add(language);
         menuBar.add(fileMenu);
         menuBar.add(editMenu);
+        menuBar.add(settingMemu);
         menuBar.add(preferenceMenu);
     }
 
@@ -183,21 +185,21 @@ public class Window extends JFrame implements ActionListener, KeyListener {
 
     }
 
-    void undo() {
+    void undoChange() {
         CodePanel codePanel = getCurrentCodePanel();
         if (codePanel == null) return;
         if (codePanel.undoManager.canUndo()) {
             codePanel.undoManager.undo();
-            codePanel.prevLength=codePanel.codeAreaDoc.getLength();
+            codePanel.prevLength = codePanel.codeAreaDoc.getLength();
         }
     }
 
-    void redo() {
+    void redoChange() {
         CodePanel codePanel = getCurrentCodePanel();
         if (codePanel == null) return;
         if (codePanel.undoManager.canRedo()) {
             codePanel.undoManager.redo();
-            codePanel.prevLength=codePanel.codeAreaDoc.getLength();
+            codePanel.prevLength = codePanel.codeAreaDoc.getLength();
 
         }
     }
@@ -209,11 +211,11 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         return name;
     }
 
-    void Message(String message, boolean flag) {
-        if (flag) Message(message);
+    public void message(String message, boolean flag) {
+        if (flag) message(message);
     }
 
-    void Message(String message) {
+    public void message(String message) {
         JOptionPane.showMessageDialog(this, message, "INFOMATION", JOptionPane.INFORMATION_MESSAGE);
     }
 
@@ -264,6 +266,12 @@ public class Window extends JFrame implements ActionListener, KeyListener {
             moveFile();
         } else if (eventTrigger == theme) {
             changeTheme();
+        } else if (eventTrigger == language) {
+            SettingProcessor.getLanguagePane();
+        } else if (eventTrigger == undo) {
+            undoChange();
+        } else if (eventTrigger == redo) {
+            redoChange();
         }
     }
 
@@ -301,10 +309,11 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         } else if (code == getCtrlKeyCode('t')) {
             changeTheme();
         } else if (code == getCtrlKeyCode('z')) {
-            undo();
+            undoChange();
         } else if (code == getCtrlKeyCode('y')) {
-            redo();
+            redoChange();
         }
+
     }
 
     @Override

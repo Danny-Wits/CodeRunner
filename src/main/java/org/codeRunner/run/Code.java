@@ -54,6 +54,11 @@ public class Code {
         }
     }
 
+    public static boolean checkInstall(Language language){
+        String command=String.format("%s --version",language.compiler);
+        final List<String> run = CMD.run(command, "|");
+        return run.get(1).isEmpty();
+    }
     //Helper Functions;
     public static String[] getExtension(String path) {
         int limit = 0;

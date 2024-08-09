@@ -3,6 +3,7 @@ package org.codeRunner.GUI;
 import org.codeRunner.GUI.Components.Button;
 import org.codeRunner.run.Code;
 import org.codeRunner.run.FileSystem;
+import org.codeRunner.run.Language;
 import org.codeRunner.run.SyntaxHL;
 
 import javax.swing.*;
@@ -20,7 +21,7 @@ public class CodePanel extends JPanel implements ActionListener {
     StyledDocument codeAreaDoc;
     SyntaxHL syntaxHighLighter;
     UndoManager undoManager;
-    String language;
+    Language language;
     public String path;
     String name;
     JPanel header;
@@ -43,7 +44,7 @@ public class CodePanel extends JPanel implements ActionListener {
     private void setDetails(String path) {
         this.codeArea = new JTextPane();
         this.codeArea.setText(FileSystem.readWhole(path));
-        this.language = Code.getExtension(path)[0];
+        this.language = Language.getLanguage(path);
         this.path = path;
         this.name = Code.getFileName(path);
     }
@@ -57,6 +58,9 @@ public class CodePanel extends JPanel implements ActionListener {
 
     private void setActions() {
         JPanel buttonBox = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JLabel runnable=new JLabel();
+        if (isRunnable())runnable.setIcon(FileSystem.getImageIcon("/assets/tickIcon.png"));
+        buttonBox.add(runnable);
         runButton = new Button("RUN", this, Window.DefaultFont, "Ctrl+R", "/assets/runFile.png");
         buttonBox.add(runButton);
         closeButton = new Button("CLOSE", this, Window.DefaultFont, "Ctrl+Shift+X", "/assets/closeFile.png");
@@ -75,12 +79,10 @@ public class CodePanel extends JPanel implements ActionListener {
         undoManager=new UndoManager();
         prevLength=codeAreaDoc.getLength();
         codeAreaDoc.addUndoableEditListener(e -> {
-
             int length = codeAreaDoc.getLength();
             if(prevLength!=length){
                 undoManager.addEdit(e.getEdit());
                 prevLength=length;
-                System.out.print("c");
             }
         });
         syntaxHighLighter=new SyntaxHL(this,codeAreaDoc,language);
@@ -95,9 +97,11 @@ public class CodePanel extends JPanel implements ActionListener {
     public String getText() {
         return this.codeArea.getText();
     }
-
+    public boolean isRunnable(){
+       return Code.checkInstall(language);
+    }
     public Icon getIcon() {
-        String path = String.format("/assets/%sLogo.png", language);
+        String path = String.format("/assets/%sLogo.png", language.extension);
         return FileSystem.getImageIcon(path);
     }
 
@@ -129,7 +133,7 @@ public class CodePanel extends JPanel implements ActionListener {
     public void renameFile(String newName) {
         if(newName==null)return;
         if(newName.isEmpty()||newName.contains(".")){
-            Window.currentWindow.Message("INVALID FILE NAME");
+            Window.currentWindow.message("INVALID FILE NAME");
             return;
         }
         String newPath = Code.getParentFolder(path) + newName +"."+ Code.getExtension(path)[0];

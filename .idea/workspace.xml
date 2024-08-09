@@ -9,19 +9,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8450b6e2-bb5b-49cb-90ed-69c5d7432f67" name="Changes" comment="finally added syntax highlighting&#10;added undo redo too">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Language.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Setting.java" afterDir="false" />
+    <list default="true" id="8450b6e2-bb5b-49cb-90ed-69c5d7432f67" name="Changes" comment="added new SettingPane system and language compiler availability check">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageSetting.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/SettingPaneContent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/SettingPane.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/SettingProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/tickIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/tickIconSmall.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar/CodeRunner.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar/CodeRunner.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar2/CodeRunner.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar2/CodeRunner.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/CodePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/CodePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/FileSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/FileSelector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/ThemeEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/ThemeEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/Label.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/Label.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Window.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Code.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Code.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/FileSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/FileSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Language.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/SyntaxHL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/SyntaxHL.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,6 +39,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -78,7 +82,6 @@
     "Downloaded.Files.Path.Enabled": "true",
     "JAR Application.CJar.executor": "Run",
     "JAR Application.CRJAR.executor": "Run",
-    "OverrideImplement.generate.javadoc": "true",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
@@ -98,6 +101,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.codeRunner.GUI.Components" />
       <recent name="org.codeRunner.run" />
       <recent name="org.codeRunner.GUI" />
     </key>
@@ -211,11 +215,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.FileSystem" />
         <item itemvalue="Application.Language" />
         <item itemvalue="Application.Window" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Code" />
-        <item itemvalue="Application.FileSystem" />
       </list>
     </recent_temporary>
   </component>
@@ -324,7 +328,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723148696183</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fixed undo redo issue">
+      <option name="closed" value="true" />
+      <created>1723208415142</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1723208415142</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -350,6 +362,8 @@
     <MESSAGE value="added themes and improved" />
     <MESSAGE value="Minor fixes" />
     <MESSAGE value="finally added syntax highlighting&#10;added undo redo too" />
-    <option name="LAST_COMMIT_MESSAGE" value="finally added syntax highlighting&#10;added undo redo too" />
+    <MESSAGE value="fixed undo redo issue" />
+    <MESSAGE value="added new SettingPane system and language compiler availability check" />
+    <option name="LAST_COMMIT_MESSAGE" value="added new SettingPane system and language compiler availability check" />
   </component>
 </project>
