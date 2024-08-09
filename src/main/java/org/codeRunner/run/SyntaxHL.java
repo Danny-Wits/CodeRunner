@@ -12,15 +12,17 @@ public class SyntaxHL{
     String language;
     CodePanel parent;
     List<String>keywords;
+    Color keywordColor;
+
     public SyntaxHL(CodePanel parent,StyledDocument document,String language){
         this.document=document;
         this.language=language;
         this.parent=parent;
         switch (language){
-            case "c"-> {keywords=Code.LANGUAGES.C.keywords;}
-            case "cpp"-> {keywords=Code.LANGUAGES.CPP.keywords;}
-            case "java"-> {keywords=Code.LANGUAGES.Java.keywords;}
-            case "py"-> {keywords=Code.LANGUAGES.Python.keywords;}
+            case "c"-> {keywords=Language.C.keywords;}
+            case "cpp"-> {keywords=Language.CPP.keywords;}
+            case "java"-> {keywords=Language.Java.keywords;}
+            case "py"-> {keywords=Language.Python.keywords;}
         }
     }
     public void highLight(){
@@ -32,28 +34,33 @@ public class SyntaxHL{
     private void processCode(String text) {
         String pattern = getPattern();
         int pos =0;
+        int length;
+        Color DefaultColor=UIManager.getColor("TextField.foreground");
         for (String s : text.split("\\W")) {
+            length=s.length();
+            pos=text.indexOf(s,pos);
             if(s.matches(pattern)){
-                document.setCharacterAttributes(pos=text.indexOf(s,pos),s.length(),getStyle(Color.orange),true);
+                document.setCharacterAttributes(pos,length,getStyle(Color.orange),true);
             }else{
-                document.setCharacterAttributes(pos=text.indexOf(s,pos),s.length(),getStyle(UIManager.getColor("TextField.foreground")),true);
+                document.setCharacterAttributes(pos,length,getStyle(DefaultColor),true);
             };
+            pos+=length;
         }
     }
 
-    private String getPattern() {
+    String getPattern() {
         StringBuilder pattern =new StringBuilder();
         keywords.forEach(e->{
             pattern.append("\\b").append(e).append("\\b").append("|");
         });
         return pattern.toString();
     }
-    private  Style getStyle(Color keyWordColor) {
+    Style getStyle(Color keyWordColor) {
         Style style = document.addStyle("KeyWordColor", null);
         StyleConstants.setForeground(style, keyWordColor);
         return style;
     }
-    private String getText() {
+    String getText() {
         int length = document.getLength();
         if (length==0) return null;
         String text;
@@ -63,5 +70,9 @@ public class SyntaxHL{
             text = null;
         }
         return text;
+    }
+
+    public void setKeywordColor(Color keywordColor) {
+        this.keywordColor = keywordColor;
     }
 }

@@ -1,14 +1,10 @@
 package org.codeRunner.run;
 
-import org.codeRunner.GUI.CodePanel;
 import org.codeRunner.Main;
 
 import javax.swing.*;
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class FileSystem {
     //User Dir
@@ -113,12 +109,7 @@ public class FileSystem {
         return new ImageIcon(url);
     }
 
-    //StateManagement
-    public static State createState(List<CodePanel> list,int themeIndex) {
-        System.out.println("Creating State");
-        return new State(list.stream().map(e -> e.path).collect(Collectors.toList()),themeIndex);
-    }
-
+    //State Management
     public static void saveState(State state) {
         System.out.println("Saving State");
         try {
@@ -135,7 +126,7 @@ public class FileSystem {
     public static State loadState() {
         System.out.println("Loading State");
         File serFile = new File(serFilePath);
-        if (!serFile.isFile()) return new State(new ArrayList<>(),2);
+        if (!serFile.isFile()) return new State();
         try {
             FileInputStream file = new FileInputStream(serFilePath);
             ObjectInputStream outputStream = new ObjectInputStream(file);
@@ -144,10 +135,10 @@ public class FileSystem {
             file.close();
             return state;
         } catch (FileNotFoundException e) {
-            return new State(new ArrayList<String>(),2);
+            return new State();
         } catch (IOException | ClassNotFoundException e) {
-            saveState(createState(new ArrayList<>(),2));
-            return new State(new ArrayList<String>(),2);
+            saveState(new State());
+            return new State();
         }
     }
 

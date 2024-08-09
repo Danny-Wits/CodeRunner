@@ -3,6 +3,7 @@ package org.codeRunner.GUI;
 import org.codeRunner.GUI.Components.MenuItem;
 import org.codeRunner.run.FileSystem;
 import org.codeRunner.run.Runner;
+import org.codeRunner.run.Setting;
 import org.codeRunner.run.State;
 
 import javax.swing.*;
@@ -15,13 +16,14 @@ import java.util.stream.Collectors;
 public class Window extends JFrame implements ActionListener, KeyListener {
     final int WIDTH = 1080;
     final int HEIGHT = 720;
+    public Setting currentSettings;
     FileSelector fileSelector;
     public ErrorLog errorLog;
     JMenuBar menuBar;
     JMenu fileMenu, editMenu, preferenceMenu;
     MenuItem newB, open, saveAs, save, rename, move, theme;
-    ArrayList<CodePanel> codePanelList = new ArrayList<>();
-    JTabbedPane codeTabs;
+    public ArrayList<CodePanel> codePanelList = new ArrayList<>();
+    public JTabbedPane codeTabs;
     public static final Font DefaultFont = new Font("DIGIFACE", Font.PLAIN, 16);
     public static State state = FileSystem.loadState();
     public static Window currentWindow;
@@ -30,7 +32,6 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         currentWindow = this;
         fileSelector = new FileSelector(this);
         menuBar = new JMenuBar();
-        ThemeEditor.setTheme(this, state.preferredThemeIndex);
 
         setMenuButtons();
         setWindow();
@@ -39,13 +40,16 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         this.add(errorLog, BorderLayout.SOUTH);
 
         setCodeTab();
-
         this.add(codeTabs);
-        loadCodePanels();
+        loadSetting();
         this.setVisible(true);
         saveCodePanelsOnExit();
     }
 
+    private void loadSetting() {
+        Setting.load(state.setting);
+        loadCodePanels();
+    }
 
     private void loadCodePanels() {
         ArrayList<CodePanel> tempList =
@@ -59,7 +63,7 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                State state = FileSystem.createState(codePanelList, ThemeEditor.currentLookAndFeelIndex);
+                State state = new State(codePanelList.stream().map((codePanel) -> codePanel.path).toList());
                 codePanelList.forEach(CodePanel::saveFile);
                 FileSystem.saveState(state);
                 super.windowClosing(e);
@@ -182,13 +186,20 @@ public class Window extends JFrame implements ActionListener, KeyListener {
     void undo() {
         CodePanel codePanel = getCurrentCodePanel();
         if (codePanel == null) return;
-        if (codePanel.undoManager.canUndo()) codePanel.undoManager.undo();
+        if (codePanel.undoManager.canUndo()) {
+            codePanel.undoManager.undo();
+            codePanel.prevLength=codePanel.codeAreaDoc.getLength();
+        }
     }
 
     void redo() {
         CodePanel codePanel = getCurrentCodePanel();
         if (codePanel == null) return;
-        if (codePanel.undoManager.canRedo()) codePanel.undoManager.redo();
+        if (codePanel.undoManager.canRedo()) {
+            codePanel.undoManager.redo();
+            codePanel.prevLength=codePanel.codeAreaDoc.getLength();
+
+        }
     }
 
     //IO
@@ -276,6 +287,7 @@ public class Window extends JFrame implements ActionListener, KeyListener {
             }
             return;
         }
+
         if (code == getCtrlKeyCode('r')) {
             run();
         } else if (code == getCtrlKeyCode('s')) {
@@ -301,10 +313,10 @@ public class Window extends JFrame implements ActionListener, KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-       CodePanel current= getCurrentCodePanel();
-      if(current!=null){
-          current.reload();
-      }
+        CodePanel current = getCurrentCodePanel();
+        if (current != null) {
+            current.reload();
+        }
     }
 
     public void runTask(String path) {

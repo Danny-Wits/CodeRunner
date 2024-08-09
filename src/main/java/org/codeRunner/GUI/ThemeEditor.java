@@ -12,17 +12,16 @@ import javax.swing.*;
 import static javax.swing.SwingUtilities.updateComponentTreeUI;
 
 public class ThemeEditor {
-    public static int currentLookAndFeelIndex;
-    public static LookAndFeel[] availableThemes = {
-            new FlatDarkLaf(), new FlatLightLaf(), new FlatDarculaLaf(), new FlatIntelliJLaf(),new FlatMacLightLaf(),new FlatMacDarkLaf()};
-    public static String[] availableThemesName = {"DARK", "LIGHT", "DARCULA", "INTELLIJ","MAC LIGHT","MAC DARK"};
+    public static int currentLookAndFeelIndex = 2;
+    public static LookAndFeel[] availableThemes = { new FlatDarkLaf(), new FlatLightLaf(), new FlatDarculaLaf(), new FlatIntelliJLaf(), new FlatMacLightLaf(), new FlatMacDarkLaf()};
+    public static String[] availableThemesName = {"DARK", "LIGHT", "DARCULA", "INTELLIJ", "MAC LIGHT", "MAC DARK"};
 
     public static void changeThemePrompt(Window parent) {
         int index = JOptionPane.showOptionDialog(parent, "SELECT YOUR THEME", "THEME SELECTOR", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, availableThemesName, availableThemesName[currentLookAndFeelIndex]);
         if (index == -1) {
             return;
         }
-        currentLookAndFeelIndex=index;
+        currentLookAndFeelIndex = index;
         setTheme(parent, currentLookAndFeelIndex);
     }
 
@@ -31,7 +30,7 @@ public class ThemeEditor {
             currentLookAndFeelIndex = index;
             UIManager.setLookAndFeel(availableThemes[currentLookAndFeelIndex]);
             updateComponentTreeUI(parent);
-            Thread t= new Thread(() -> updateComponentTreeUI(parent.fileSelector));
+            Thread t = new Thread(() -> updateComponentTreeUI(parent.fileSelector));
             t.setDaemon(true);
             t.start();
 

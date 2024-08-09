@@ -1,6 +1,6 @@
 package org.codeRunner.GUI;
 
-import org.codeRunner.run.Code;
+import org.codeRunner.run.Language;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -14,7 +14,7 @@ public class FileSelector extends JFileChooser {
          this.setCurrentDirectory(new File("./"));
          this.parent=parent;
          this.setPreferredSize(new Dimension(720,540));
-         FileNameExtensionFilter filter = new FileNameExtensionFilter("Source Code ", Code.getAvailableLanguages());
+         FileNameExtensionFilter filter = new FileNameExtensionFilter("Source Code ", Language.getAvailableExtensions());
          this.setFileFilter(filter);
      }
      public String getFile(String title){

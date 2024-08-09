@@ -27,7 +27,7 @@ public class CodePanel extends JPanel implements ActionListener {
     JLabel headerLabel;
     Button runButton;
     Button closeButton;
-
+    int prevLength;
 
     public CodePanel(String path) {
         super(new BorderLayout(), true);
@@ -73,7 +73,16 @@ public class CodePanel extends JPanel implements ActionListener {
         codeArea.getText();
         codeAreaDoc=codeArea.getStyledDocument();
         undoManager=new UndoManager();
-        codeAreaDoc.addUndoableEditListener(undoManager);
+        prevLength=codeAreaDoc.getLength();
+        codeAreaDoc.addUndoableEditListener(e -> {
+
+            int length = codeAreaDoc.getLength();
+            if(prevLength!=length){
+                undoManager.addEdit(e.getEdit());
+                prevLength=length;
+                System.out.print("c");
+            }
+        });
         syntaxHighLighter=new SyntaxHL(this,codeAreaDoc,language);
         syntaxHighLighter.highLight();
         JScrollPane scrollPane = new JScrollPane(codeArea);

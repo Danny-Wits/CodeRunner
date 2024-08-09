@@ -9,23 +9,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8450b6e2-bb5b-49cb-90ed-69c5d7432f67" name="Changes" comment="Minor fixes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/SyntaxHL.java" afterDir="false" />
+    <list default="true" id="8450b6e2-bb5b-49cb-90ed-69c5d7432f67" name="Changes" comment="finally added syntax highlighting&#10;added undo redo too">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Language.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Setting.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar/CodeRunner.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar/CodeRunner.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar2/CodeRunner.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar2/CodeRunner.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/CodePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/CodePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/Button.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/MenuItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/MenuItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/ErrorLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/ErrorLog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/FileSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/FileSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/ThemeEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/ThemeEditor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Window.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Code.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Code.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/FileSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/FileSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/State.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/cLogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/cLogo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/cppLogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/cppLogo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/javaLogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/javaLogo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/pyLogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/pyLogo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/runFile.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/runFile.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/SyntaxHL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/SyntaxHL.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,37 +66,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.CMD.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Code.executor&quot;: &quot;Run&quot;,
-    &quot;Application.FileSystem.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Window.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
-    &quot;JAR Application.CJar.executor&quot;: &quot;Run&quot;,
-    &quot;JAR Application.CRJAR.executor&quot;: &quot;Run&quot;,
-    &quot;OverrideImplement.generate.javadoc&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/danny/OneDrive/Desktop/java/CodeRunner/out/artifacts/CodeRunner_jar2/CodeRunner.jar&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/danny/OneDrive/Desktop/java/CodeRunner/src/main/java/org/codeRunner/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;build.tools&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.CMD.executor": "Run",
+    "Application.Code.executor": "Run",
+    "Application.FileSystem.executor": "Run",
+    "Application.Language.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.Window.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "true",
+    "JAR Application.CJar.executor": "Run",
+    "JAR Application.CRJAR.executor": "Run",
+    "OverrideImplement.generate.javadoc": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "full.screen.before.presentation.mode": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/danny/OneDrive/Desktop/java/CodeRunner/out/artifacts/CodeRunner_jar2/CodeRunner.jar",
+    "onboarding.tips.debug.path": "C:/Users/danny/OneDrive/Desktop/java/CodeRunner/src/main/java/org/codeRunner/Main.java",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "build.tools"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.codeRunner.run" />
       <recent name="org.codeRunner.GUI" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -116,19 +115,6 @@
     </option>
   </component>
   <component name="RunManager" selected="JAR Application.CRJAR">
-    <configuration name="CMD" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.codeRunner.run.CMD" />
-      <module name="CodeRunner" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.codeRunner.run.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Code" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.codeRunner.run.Code" />
       <module name="CodeRunner" />
@@ -144,6 +130,19 @@
     </configuration>
     <configuration name="FileSystem" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.codeRunner.run.FileSystem" />
+      <module name="CodeRunner" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.codeRunner.run.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Language" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.codeRunner.run.Language" />
       <module name="CodeRunner" />
       <extension name="coverage">
         <pattern>
@@ -202,9 +201,9 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.Language" />
       <item itemvalue="Application.Window" />
       <item itemvalue="Application.FileSystem" />
-      <item itemvalue="Application.CMD" />
       <item itemvalue="Application.Code" />
       <item itemvalue="Application.Main" />
       <item itemvalue="JAR Application.CJar" />
@@ -212,11 +211,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Language" />
         <item itemvalue="Application.Window" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Code" />
         <item itemvalue="Application.FileSystem" />
-        <item itemvalue="Application.CMD" />
       </list>
     </recent_temporary>
   </component>
@@ -309,7 +308,23 @@
       <option name="project" value="LOCAL" />
       <updated>1723061931260</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="finally added syntax highlighting&#10;added undo redo too">
+      <option name="closed" value="true" />
+      <created>1723148673613</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1723148673613</updated>
+    </task>
+    <task id="LOCAL-00012" summary="finally added syntax highlighting&#10;added undo redo too">
+      <option name="closed" value="true" />
+      <created>1723148696183</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1723148696183</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -334,6 +349,7 @@
     <MESSAGE value="added current file information label" />
     <MESSAGE value="added themes and improved" />
     <MESSAGE value="Minor fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Minor fixes" />
+    <MESSAGE value="finally added syntax highlighting&#10;added undo redo too" />
+    <option name="LAST_COMMIT_MESSAGE" value="finally added syntax highlighting&#10;added undo redo too" />
   </component>
 </project>
