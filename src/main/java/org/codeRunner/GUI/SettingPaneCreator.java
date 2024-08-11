@@ -1,19 +1,19 @@
 package org.codeRunner.GUI;
 
 import org.codeRunner.GUI.Components.Button;
-import org.codeRunner.GUI.Components.SettingPaneContent;
+import org.codeRunner.GUI.Interfaces.SettingPane;
 
 import javax.swing.*;
 import java.awt.*;
 
 
-public class SettingPane extends JPanel {
+public class SettingPaneCreator extends JPanel {
     JPanel content = new JPanel();
     Button save;
     Button close;
     JDialog popup;
 
-    public SettingPane(SettingPaneContent settingPaneContent) {
+    public SettingPaneCreator(SettingPane settingPaneContent) {
         setLayout(new BorderLayout());
         content.add(settingPaneContent.getPanel());
         add(content, BorderLayout.CENTER);
@@ -28,9 +28,9 @@ public class SettingPane extends JPanel {
         popup.setLocation(centreX(),centreY());
     }
 
-    public JDialog createPopup(SettingPane settingPane) {
+    public JDialog createPopup(SettingPaneCreator settingPaneCreator) {
         JDialog jDialog = new JDialog(Window.currentWindow, "SETTING", true);
-        jDialog.getContentPane().add(settingPane);
+        jDialog.getContentPane().add(settingPaneCreator);
         return jDialog;
     }
 

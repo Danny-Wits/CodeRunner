@@ -1,6 +1,6 @@
 package org.codeRunner.GUI;
 
-import org.codeRunner.run.Language;
+import org.codeRunner.Scripts.Language;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;

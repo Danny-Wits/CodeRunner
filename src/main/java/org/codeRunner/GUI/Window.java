@@ -1,7 +1,7 @@
 package org.codeRunner.GUI;
 
 import org.codeRunner.GUI.Components.MenuItem;
-import org.codeRunner.run.*;
+import org.codeRunner.Scripts.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,8 +16,11 @@ public class Window extends JFrame implements ActionListener, KeyListener {
     FileSelector fileSelector;
     public ErrorLog errorLog;
     JMenuBar menuBar;
-    JMenu fileMenu, editMenu, settingMemu, preferenceMenu;
-    MenuItem newB, open, saveAs, save, rename, move, theme, language, undo, redo;
+    JMenu fileMenu, editMenu, settingMenu, preferenceMenu;
+    MenuItem newB, open, saveAs, save;
+    MenuItem  rename,move, undo, redo;
+    MenuItem languageInfo,languageSetting;
+    MenuItem theme;
     public ArrayList<CodePanel> codePanelList = new ArrayList<>();
     public JTabbedPane codeTabs;
     public static final Font DefaultFont = new Font("DIGIFACE", Font.PLAIN, 16);
@@ -43,7 +46,7 @@ public class Window extends JFrame implements ActionListener, KeyListener {
     }
 
     private void loadSetting() {
-        Setting.load(state.setting);
+        SettingState.load(state.setting);
         loadCodePanels();
     }
 
@@ -85,7 +88,8 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         undo = new MenuItem("Undo", this, DefaultFont, "Ctrl+Z", "/assets/moveFile.png");
         redo = new MenuItem("Redo", this, DefaultFont, "Ctrl+Y", "/assets/moveFile.png");
 
-        language = new MenuItem("Language", this, DefaultFont, "Language Setting", "/assets/moveFile.png");
+        languageInfo = new MenuItem("Language Info", this, DefaultFont, "Language Setting", "/assets/moveFile.png");
+        languageSetting = new MenuItem("Language Setting", this, DefaultFont, "Language Setting", "/assets/moveFile.png");
 
         theme = new MenuItem("Theme", this, DefaultFont, "Ctrl+T", "/assets/moveFile.png");
 
@@ -102,14 +106,17 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         editMenu.add(undo);
         editMenu.add(redo);
 
+        settingMenu = new JMenu("SETTING");
+        settingMenu.add(languageInfo);
+        settingMenu.add(languageSetting);
+
         preferenceMenu = new JMenu("PREFERENCES");
         preferenceMenu.add(theme);
 
-        settingMemu = new JMenu("SETTING");
-        settingMemu.add(language);
+
         menuBar.add(fileMenu);
         menuBar.add(editMenu);
-        menuBar.add(settingMemu);
+        menuBar.add(settingMenu);
         menuBar.add(preferenceMenu);
     }
 
@@ -204,12 +211,28 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         }
     }
 
+    void languageInfoPane(){
+
+        SettingProcessor.getLanguageInfoPane();
+    }
+
+    void languageSettingPane(){
+
+        SettingProcessor.getLanguageSettingPane();
+    }
+
     //IO
-    String input(String prompt) {
+    public String input(String prompt) {
         String name = JOptionPane.showInputDialog(this, prompt);
         if (name == null) name = "";
         return name;
     }
+    public String input(String prompt,String defaultValue) {
+        String name = JOptionPane.showInputDialog(this, prompt,defaultValue);
+        if (name == null) name = "";
+        return name;
+    }
+
 
     public void message(String message, boolean flag) {
         if (flag) message(message);
@@ -266,9 +289,11 @@ public class Window extends JFrame implements ActionListener, KeyListener {
             moveFile();
         } else if (eventTrigger == theme) {
             changeTheme();
-        } else if (eventTrigger == language) {
-            SettingProcessor.getLanguagePane();
-        } else if (eventTrigger == undo) {
+        } else if (eventTrigger == languageInfo) {
+           languageInfoPane();
+        }  else if (eventTrigger == languageSetting) {
+            languageSettingPane();
+        }else if (eventTrigger == undo) {
             undoChange();
         } else if (eventTrigger == redo) {
             redoChange();

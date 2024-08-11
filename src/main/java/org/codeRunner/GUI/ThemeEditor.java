@@ -8,12 +8,13 @@ import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
 import javax.swing.*;
+import java.awt.*;
 
 import static javax.swing.SwingUtilities.updateComponentTreeUI;
 
 public class ThemeEditor {
     public static int currentLookAndFeelIndex = 2;
-    public static LookAndFeel[] availableThemes = { new FlatDarkLaf(), new FlatLightLaf(), new FlatDarculaLaf(), new FlatIntelliJLaf(), new FlatMacLightLaf(), new FlatMacDarkLaf()};
+    public static LookAndFeel[] availableThemes = {new FlatDarkLaf(), new FlatLightLaf(), new FlatDarculaLaf(), new FlatIntelliJLaf(), new FlatMacLightLaf(), new FlatMacDarkLaf()};
     public static String[] availableThemesName = {"DARK", "LIGHT", "DARCULA", "INTELLIJ", "MAC LIGHT", "MAC DARK"};
 
     public static void changeThemePrompt(Window parent) {
@@ -37,5 +38,17 @@ public class ThemeEditor {
         } catch (UnsupportedLookAndFeelException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static Color getColor() {
+        Color color = JColorChooser.showDialog(Window.currentWindow,"PICK A COLOUR",Color.ORANGE);
+        if (color == null) return Color.ORANGE;
+        return color;
+    }
+
+    public static Color getColor(Color defaultColor) {
+        Color color = JColorChooser.showDialog(Window.currentWindow,"PICK A COLOUR",defaultColor);
+        if (color == null) return defaultColor;
+        return color;
     }
 }

@@ -1,89 +1,94 @@
 package org.codeRunner.GUI.Components;
 
+import org.codeRunner.GUI.Interfaces.SettingPane;
+import org.codeRunner.GUI.ThemeEditor;
 import org.codeRunner.GUI.Window;
-import org.codeRunner.run.Code;
-import org.codeRunner.run.FileSystem;
-import org.codeRunner.run.Language;
+import org.codeRunner.Scripts.Language;
+import org.codeRunner.Scripts.SettingProcessor;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
-public class LanguageSetting extends JPanel implements ActionListener,SettingPaneContent {
-    public Button ok;
-    public Button cancel;
-    public JDialog popup;
-
-    public LanguageSetting() {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+public class LanguageSetting extends SettingPane {
+    Button add;
+    Button delete;
+    List<Language>addedLanguageList;
+    public static LanguageSetting current;
+    public LanguageSetting(){
+        current=this;
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         Language.languageList.forEach(e -> {
             LanguagePane languagePane = new LanguagePane(e);
             languagePane.setAlignmentX(Component.LEFT_ALIGNMENT);
-            add(languagePane);
+            panel.add(languagePane);
         });
+
+        add=new Button("ADD",(e)->{addToList();});
+        delete=new Button("DELETE",(e)->{deleteFromList();});
+        JPanel buttonHolder=new JPanel(new GridLayout(1,2));
+        buttonHolder.add(add);
+        buttonHolder.add(delete);
+        panel.add(buttonHolder);
+    }
+
+    private void addToList() {
+        SettingProcessor.getLanguageAdder();
+    }
+
+    private void deleteFromList() {
+    }
+    private void deleteFromList(List<Language> languageList) {
     }
 
     @Override
-    public void load(Button ok, Button cancel,JDialog popup){
-        this.ok=ok;
-        this.cancel=cancel;
-        this.popup=popup;
-        popup.setSize(new Dimension(480, 240));
+    public void loaded(){
+        popup.setSize(720,360);
     }
 
     @Override
-    public ActionListener getActionListener() {
-        return this;
+    public void saved() {
+    popup.dispose();
     }
 
     @Override
-    public JPanel getPanel() {
-        return this;
+    public void canceled() {
+        deleteFromList(addedLanguageList);
+        popup.dispose();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==ok){
-            popup.dispose();
-        }if(e.getSource()==cancel){
-            popup.dispose();
-        }
-    }
 
-    static class LanguagePane extends JPanel implements ActionListener {
-        JPanel title;
-        Button install;
-        Button check;
+    private static class LanguagePane extends JPanel implements ActionListener {
+        JLabel name;
+        Button keywordColor;
+        Button keywords;
         Language language;
-
-        LanguagePane(Language language) {
+        LanguagePane(Language language){
+            this.language=language;
             setLayout(new GridLayout(1,3));
-            this.language = language;
-            title = new JPanel(new GridLayout(1,2));
-            JLabel name = new JLabel(language.name);
-            JLabel installed=new JLabel();
-            Thread thread = new Thread(()->{
-                if(Code.checkInstall(language))installed.setIcon(FileSystem.getImageIcon("/assets/tickIconSmall.png"));
-            });
-            thread.start();
-            title.add(name);
-            title.add(installed);
-            install = new Button("Install", this);
-            check = new Button("Check Installation", this);
-            add(title);
-            add(install);
-            add(check);
-
+            name=new JLabel(language.name);
+            keywordColor=new Button("Edit Keyword Color",this);
+            keywords=new Button("Edit Keywords",this);
+            add(name);
+            add(keywordColor);
+            add(keywords);
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == check) {
-                Window.currentWindow.message(language.name + " is " + ((Code.checkInstall(language)) ? "" : "not ") + "installed");
-            } else if (e.getSource() == install) {
-                FileSystem.goToUrl(language.URL);
+            if(e.getSource()==keywordColor){
+                language.setKeywordColor(ThemeEditor.getColor(language.keywordColor));
+            }else if(e.getSource()==keywords){
+                keywordsEditor();
             }
+        }
+
+        private void keywordsEditor() {
+           String keywords= Window.currentWindow.input("EDIT THE KEYWORDS FOR "+language.name,language.getKeywordString());
+            if (keywords.isEmpty())return;
+            language.setKeywords(keywords);
         }
     }
 }

@@ -10,22 +10,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8450b6e2-bb5b-49cb-90ed-69c5d7432f67" name="Changes" comment="added new SettingPane system and language compiler availability check">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageSetting.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/SettingPaneContent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/SettingPane.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/SettingProcessor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/tickIcon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/tickIconSmall.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageAdder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar/CodeRunner.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar/CodeRunner.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar2/CodeRunner.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar2/CodeRunner.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/CodePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/CodePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/Label.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/Label.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/Button.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageSetting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/SettingPaneContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Interfaces/SettingPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/FileSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/FileSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/SettingPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/SettingPaneCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/ThemeEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/ThemeEditor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Code.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Code.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/FileSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/FileSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Language.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/SyntaxHL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/SyntaxHL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/CMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/CMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Code.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/Code.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/FileSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/FileSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/Language.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/Runner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Setting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/SettingState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/SettingProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/SettingProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/SyntaxHL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/SyntaxHL.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +43,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -70,35 +75,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.CMD.executor": "Run",
-    "Application.Code.executor": "Run",
-    "Application.FileSystem.executor": "Run",
-    "Application.Language.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.Window.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "true",
-    "JAR Application.CJar.executor": "Run",
-    "JAR Application.CRJAR.executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "full.screen.before.presentation.mode": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/danny/OneDrive/Desktop/java/CodeRunner/out/artifacts/CodeRunner_jar2/CodeRunner.jar",
-    "onboarding.tips.debug.path": "C:/Users/danny/OneDrive/Desktop/java/CodeRunner/src/main/java/org/codeRunner/Main.java",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "build.tools"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.CMD.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Code.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FileSystem.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Language.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Window.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
+    &quot;JAR Application.CJar.executor&quot;: &quot;Run&quot;,
+    &quot;JAR Application.CRJAR.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/danny/OneDrive/Desktop/java/CodeRunner/out/artifacts/CodeRunner_jar2/CodeRunner.jar&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/danny/OneDrive/Desktop/java/CodeRunner/src/main/java/org/codeRunner/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;build.tools&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="org.codeRunner.GUI.Components" />
@@ -120,11 +125,11 @@
   </component>
   <component name="RunManager" selected="JAR Application.CRJAR">
     <configuration name="Code" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.codeRunner.run.Code" />
+      <option name="MAIN_CLASS_NAME" value="org.codeRunner.Scripts.Code" />
       <module name="CodeRunner" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.codeRunner.run.*" />
+          <option name="PATTERN" value="org.codeRunner.Scripts.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -133,11 +138,11 @@
       </method>
     </configuration>
     <configuration name="FileSystem" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.codeRunner.run.FileSystem" />
+      <option name="MAIN_CLASS_NAME" value="org.codeRunner.Scripts.FileSystem" />
       <module name="CodeRunner" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.codeRunner.run.*" />
+          <option name="PATTERN" value="org.codeRunner.Scripts.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -146,11 +151,11 @@
       </method>
     </configuration>
     <configuration name="Language" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.codeRunner.run.Language" />
+      <option name="MAIN_CLASS_NAME" value="org.codeRunner.Scripts.Language" />
       <module name="CodeRunner" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.codeRunner.run.*" />
+          <option name="PATTERN" value="org.codeRunner.Scripts.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -163,7 +168,7 @@
       <module name="CodeRunner" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.codeRunner.run.*" />
+          <option name="PATTERN" value="org.codeRunner.Scripts.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -336,7 +341,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723208415142</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="added new SettingPane system and language compiler availability check">
+      <option name="closed" value="true" />
+      <created>1723231485051</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1723231485052</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

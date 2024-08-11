@@ -1,6 +1,6 @@
 package org.codeRunner.GUI.Components;
 
-import org.codeRunner.run.FileSystem;
+import org.codeRunner.Scripts.FileSystem;
 
 import javax.swing.*;
 import java.awt.*;

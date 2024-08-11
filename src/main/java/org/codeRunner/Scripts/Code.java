@@ -1,4 +1,4 @@
-package org.codeRunner.run;
+package org.codeRunner.Scripts;
 
 import java.util.List;
 
@@ -20,6 +20,9 @@ public class Code {
                 return error.isEmpty();
             }
             case "py" -> {
+                return run(path).get(1).isEmpty();
+            }
+            default -> {
                 return run(path).get(1).isEmpty();
             }
         }
@@ -49,7 +52,10 @@ public class Code {
                 return CMD.run(runCMD, getParentFolder(path));
             }
             default -> {
-                return null;
+                Language language = Language.find(extension);
+                if(language ==null)return List.of(new String[]{"","Compiler NOT FOUND"});
+                FileSystem.writeWhole(String.format("timeout /t 1\ncls\n%s %s\npause",language.compiler, path), batPath);
+                return CMD.run(runCMD, getParentFolder(path));
             }
         }
     }

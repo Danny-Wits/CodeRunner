@@ -1,9 +1,11 @@
-package org.codeRunner.run;
+package org.codeRunner.Scripts;
 
 import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Language implements Serializable {
 
@@ -44,5 +46,38 @@ public class Language implements Serializable {
             if(language.extension.equals(extension)){return language;}
         }
         return null;
+    }
+    public void setKeywordColor(Color keywordColor) {
+        this.keywordColor = keywordColor;
+    }
+    public void setKeywords(List<String> keywords) {
+        this.keywords = keywords;
+    }
+    public void setKeywords(String keywords){
+        this.keywords=parseKeywordString(keywords);
+    }
+    public static List<String> parseKeywordString(String keyword){
+        return Arrays.stream(keyword.trim().split(",")).collect(Collectors.toList());
+    }
+    public String getKeywordString(){
+        StringBuilder stringBuilder=new StringBuilder();
+        keywords.forEach(e->{
+            stringBuilder.append(e).append(",");
+        });
+        return stringBuilder.substring(0,stringBuilder.length()-1);
+    }
+    public void deleteLanguage(int index){
+        languageList.remove(index);
+    }
+    public static List<String> getLanguageNames(){
+        return languageList.stream().map(e->e.name).toList();
+    }
+    public static Language find(String extension){
+        for (Language language : languageList) {
+            if(language.extension.equals(extension)){
+                return language;
+            }
+        }return null;
+
     }
 }

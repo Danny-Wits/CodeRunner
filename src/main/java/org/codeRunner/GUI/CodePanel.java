@@ -1,10 +1,10 @@
 package org.codeRunner.GUI;
 
 import org.codeRunner.GUI.Components.Button;
-import org.codeRunner.run.Code;
-import org.codeRunner.run.FileSystem;
-import org.codeRunner.run.Language;
-import org.codeRunner.run.SyntaxHL;
+import org.codeRunner.Scripts.Code;
+import org.codeRunner.Scripts.FileSystem;
+import org.codeRunner.Scripts.Language;
+import org.codeRunner.Scripts.SyntaxHL;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -106,7 +106,7 @@ public class CodePanel extends JPanel implements ActionListener {
     }
 
     public String getDetails() {
-        return String.format("%S Lines:%d Size:%dKB Language:%S  Path:%s", name, getLines(), getSizeOfFile(), language, path);
+        return String.format("%S Lines:%d Size:%dKB Language:%S  Path:%s", name, getLines(), getSizeOfFile(), language.name, path);
     }
 
     private int getLines() {

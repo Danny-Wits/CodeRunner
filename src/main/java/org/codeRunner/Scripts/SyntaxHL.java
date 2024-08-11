@@ -1,4 +1,4 @@
-package org.codeRunner.run;
+package org.codeRunner.Scripts;
 
 import org.codeRunner.GUI.CodePanel;
 
