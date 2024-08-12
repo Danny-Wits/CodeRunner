@@ -9,28 +9,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8450b6e2-bb5b-49cb-90ed-69c5d7432f67" name="Changes" comment="added new SettingPane system and language compiler availability check">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageAdder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageInfo.java" afterDir="false" />
+    <list default="true" id="8450b6e2-bb5b-49cb-90ed-69c5d7432f67" name="Changes" comment="adding new Language Setting">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar2/CodeRunner.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar2/CodeRunner.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/CodePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/CodePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/Button.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageAdder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageAdder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageSetting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/SettingPaneContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Interfaces/SettingPane.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/FileSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/FileSelector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/SettingPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/SettingPaneCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/ThemeEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/ThemeEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Interfaces/SettingPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Interfaces/SettingPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/SettingPaneCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/SettingPaneCreator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/CMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/CMD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Code.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/Code.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/FileSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/FileSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/Language.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/Runner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/Setting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/SettingState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/SettingProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/SettingProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/State.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/run/SyntaxHL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/SyntaxHL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/Language.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/SettingProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/SettingProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/SettingState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/SettingState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/State.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +93,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;build.tools&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -349,7 +341,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723231485052</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="adding new Language Setting">
+      <option name="closed" value="true" />
+      <created>1723381212551</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1723381212551</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -377,6 +377,7 @@
     <MESSAGE value="finally added syntax highlighting&#10;added undo redo too" />
     <MESSAGE value="fixed undo redo issue" />
     <MESSAGE value="added new SettingPane system and language compiler availability check" />
-    <option name="LAST_COMMIT_MESSAGE" value="added new SettingPane system and language compiler availability check" />
+    <MESSAGE value="adding new Language Setting" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding new Language Setting" />
   </component>
 </project>

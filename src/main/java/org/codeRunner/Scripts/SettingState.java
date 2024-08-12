@@ -4,24 +4,23 @@ import org.codeRunner.GUI.ThemeEditor;
 import org.codeRunner.GUI.Window;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SettingState implements Serializable {
-    public int  LookAndFeelIndex=2;
-    public HashMap<String,Language> availableLanguages=new HashMap<>();
-    public SettingState() {
-    }
-    public SettingState(int index){
+    public int  LookAndFeelIndex;
+    public List<Language>languageList=new ArrayList<>();
+    public SettingState(){
         LookAndFeelIndex =ThemeEditor.currentLookAndFeelIndex;
-        Language.languageList.forEach(this::addToMap);
+        languageList=Language.languageList;
     }
-    private void addToMap(Language language){
-        availableLanguages.put(language.extension,language);
+    public void setDefault(){
+        LookAndFeelIndex=2;
+        languageList=new ArrayList<>(List.of(Language.C,Language.CPP,Language.Java,Language.Python));
     }
+
     public static void load(SettingState setting){
         ThemeEditor.setTheme(Window.currentWindow,setting.LookAndFeelIndex);
     }
-    public static SettingState DefaultSetting(){
-        return new SettingState();
-    }
+
 }

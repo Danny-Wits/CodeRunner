@@ -4,7 +4,6 @@ import org.codeRunner.GUI.Interfaces.SettingPane;
 import org.codeRunner.GUI.ThemeEditor;
 import org.codeRunner.GUI.Window;
 import org.codeRunner.Scripts.Language;
-import org.codeRunner.Scripts.SettingProcessor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +15,9 @@ public class LanguageAdder extends SettingPane {
     Color color = Color.orange;
     JTextArea keywords;
 
-    public LanguageAdder() {
+    @Override
+    public void draw() {
+        title = "ADD LANGUAGE";
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         nameL = new JLabel("NAME");
         name = new JTextField(20);
@@ -52,7 +53,6 @@ public class LanguageAdder extends SettingPane {
         for (Component component : panel.getComponents()) {
             ((JComponent) component).setAlignmentX(Component.LEFT_ALIGNMENT);
         }
-        panel.repaint();
     }
 
     @Override
@@ -60,16 +60,17 @@ public class LanguageAdder extends SettingPane {
         System.out.println("adding language");
         for (Component component : panel.getComponents()) {
             if (component.getClass() == JTextField.class) {
-                if (((JTextField) component).getText().equals("")) {
+                if (((JTextField) component).getText().trim().isEmpty()) {
                     Window.currentWindow.message("Invalid Inputs");
                     return;
                 }
             }
         }
-        Language l = new Language(name.getText(), extension.getText(), compiler.getText(), color, Language.parseKeywordString(keywords.getText()), url.getText());
-        popup.dispose();
-        LanguageSetting.current.popup.dispose();
-        SettingProcessor.getLanguageSettingPane();
+        Language newLanguage = new Language(name.getText(), extension.getText(), compiler.getText(), color, Language.parseKeywordString(keywords.getText()), url.getText());
+        if (!newLanguage.name.equals(Language.INVALID)) {
+            popup.dispose();
+            LanguageSetting.current.refresh();
+        }
     }
 
     @Override
@@ -77,8 +78,10 @@ public class LanguageAdder extends SettingPane {
         popup.dispose();
     }
 
+
     @Override
     public void loaded() {
         popup.setSize(360, 480);
     }
+
 }

@@ -14,10 +14,11 @@ public class FileSelector extends JFileChooser {
          this.setCurrentDirectory(new File("./"));
          this.parent=parent;
          this.setPreferredSize(new Dimension(720,540));
-         FileNameExtensionFilter filter = new FileNameExtensionFilter("Source Code ", Language.getAvailableExtensions());
-         this.setFileFilter(filter);
+
      }
      public String getFile(String title){
+         FileNameExtensionFilter filter = new FileNameExtensionFilter("Source Code ", Language.getAvailableExtensions());
+         this.setFileFilter(filter);
          this.setDialogTitle(title);
          int returnStatus = this.showOpenDialog(this.parent);
          if(returnStatus==JFileChooser.APPROVE_OPTION){
@@ -27,6 +28,8 @@ public class FileSelector extends JFileChooser {
          return null;
      }
     public String saveFile(String title){
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Source Code ", Language.getAvailableExtensions());
+        this.setFileFilter(filter);
         this.setDialogTitle(title);
         int returnStatus = this.showSaveDialog(this.parent);
         if(returnStatus==JFileChooser.APPROVE_OPTION){

@@ -11,9 +11,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LanguageInfo extends SettingPane implements ActionListener{
+public class LanguageInfo extends SettingPane {
 
-    public LanguageInfo() {
+    @Override
+    public void draw() {
+        title = "LANGUAGE INFO";
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         Language.languageList.forEach(e -> {
             LanguagePane languagePane = new LanguagePane(e);
@@ -34,7 +36,12 @@ public class LanguageInfo extends SettingPane implements ActionListener{
 
     @Override
     public void loaded() {
-        popup.setSize(540,360);
+        popup.setSize(540, 360);
+    }
+
+    @Override
+    public void refresh() {
+
     }
 
 
@@ -45,13 +52,14 @@ public class LanguageInfo extends SettingPane implements ActionListener{
         Language language;
 
         LanguagePane(Language language) {
-            setLayout(new GridLayout(1,3));
+            setLayout(new GridLayout(1, 3));
             this.language = language;
-            title = new JPanel(new GridLayout(1,2));
+            title = new JPanel(new GridLayout(1, 2));
             JLabel name = new JLabel(language.name);
-            JLabel installed=new JLabel();
-            Thread thread = new Thread(()->{
-                if(Code.checkInstall(language))installed.setIcon(FileSystem.getImageIcon("/assets/tickIconSmall.png"));
+            JLabel installed = new JLabel();
+            Thread thread = new Thread(() -> {
+                if (Code.checkInstall(language))
+                    installed.setIcon(FileSystem.getImageIcon("/assets/tickIconSmall.png"));
             });
             thread.start();
             title.add(name);

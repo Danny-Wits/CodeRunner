@@ -18,8 +18,8 @@ public class Window extends JFrame implements ActionListener, KeyListener {
     JMenuBar menuBar;
     JMenu fileMenu, editMenu, settingMenu, preferenceMenu;
     MenuItem newB, open, saveAs, save;
-    MenuItem  rename,move, undo, redo;
-    MenuItem languageInfo,languageSetting;
+    MenuItem rename, move, undo, redo;
+    MenuItem languageInfo, languageSetting;
     MenuItem theme;
     public ArrayList<CodePanel> codePanelList = new ArrayList<>();
     public JTabbedPane codeTabs;
@@ -41,13 +41,14 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         setCodeTab();
         this.add(codeTabs);
         loadSetting();
+        loadCodePanels();
         this.setVisible(true);
         saveCodePanelsOnExit();
     }
 
     private void loadSetting() {
-        SettingState.load(state.setting);
-        loadCodePanels();
+        SettingProcessor.load(state.setting);
+
     }
 
     private void loadCodePanels() {
@@ -72,8 +73,14 @@ public class Window extends JFrame implements ActionListener, KeyListener {
     }
 
     public void reRender() {
+        this.revalidate();
+    }
 
-        this.repaint();
+    public void reCheckLanguage() {
+        codePanelList.forEach(e -> {
+            e.language = Language.getLanguage(e.path);
+            e.reload();
+        });
     }
 
     //GUI
@@ -88,8 +95,8 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         undo = new MenuItem("Undo", this, DefaultFont, "Ctrl+Z", "/assets/moveFile.png");
         redo = new MenuItem("Redo", this, DefaultFont, "Ctrl+Y", "/assets/moveFile.png");
 
-        languageInfo = new MenuItem("Language Info", this, DefaultFont, "Language Setting", "/assets/moveFile.png");
-        languageSetting = new MenuItem("Language Setting", this, DefaultFont, "Language Setting", "/assets/moveFile.png");
+        languageInfo = new MenuItem("Info", this, DefaultFont, "Language Setting", "/assets/moveFile.png");
+        languageSetting = new MenuItem("Setting", this, DefaultFont, "Language Setting", "/assets/moveFile.png");
 
         theme = new MenuItem("Theme", this, DefaultFont, "Ctrl+T", "/assets/moveFile.png");
 
@@ -107,8 +114,10 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         editMenu.add(redo);
 
         settingMenu = new JMenu("SETTING");
-        settingMenu.add(languageInfo);
-        settingMenu.add(languageSetting);
+        JMenu language=new JMenu("Language");
+        language.add(languageInfo);
+        language.add(languageSetting);
+        settingMenu.add(language);
 
         preferenceMenu = new JMenu("PREFERENCES");
         preferenceMenu.add(theme);
@@ -211,12 +220,12 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         }
     }
 
-    void languageInfoPane(){
+    void languageInfoPane() {
 
         SettingProcessor.getLanguageInfoPane();
     }
 
-    void languageSettingPane(){
+    void languageSettingPane() {
 
         SettingProcessor.getLanguageSettingPane();
     }
@@ -227,8 +236,9 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         if (name == null) name = "";
         return name;
     }
-    public String input(String prompt,String defaultValue) {
-        String name = JOptionPane.showInputDialog(this, prompt,defaultValue);
+
+    public String input(String prompt, String defaultValue) {
+        String name = JOptionPane.showInputDialog(this, prompt, defaultValue);
         if (name == null) name = "";
         return name;
     }
@@ -290,10 +300,10 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         } else if (eventTrigger == theme) {
             changeTheme();
         } else if (eventTrigger == languageInfo) {
-           languageInfoPane();
-        }  else if (eventTrigger == languageSetting) {
+            languageInfoPane();
+        } else if (eventTrigger == languageSetting) {
             languageSettingPane();
-        }else if (eventTrigger == undo) {
+        } else if (eventTrigger == undo) {
             undoChange();
         } else if (eventTrigger == redo) {
             redoChange();
@@ -358,6 +368,7 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         Thread runnerThread = new Thread(runner);
         runnerThread.start();
     }
+
 
 
 }

@@ -15,22 +15,27 @@ import java.util.List;
 public class LanguageSetting extends SettingPane {
     Button add;
     Button delete;
-    List<Language>addedLanguageList;
+    List<Language> addedLanguageList;
     public static LanguageSetting current;
-    public LanguageSetting(){
-        current=this;
+
+    @Override
+    public void draw() {
+        title = "LANGUAGE SETTING";
+        current = this;
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         Language.languageList.forEach(e -> {
             LanguagePane languagePane = new LanguagePane(e);
             languagePane.setAlignmentX(Component.LEFT_ALIGNMENT);
             panel.add(languagePane);
         });
-
-        add=new Button("ADD",(e)->{addToList();});
-        delete=new Button("DELETE",(e)->{deleteFromList();});
-        JPanel buttonHolder=new JPanel(new GridLayout(1,2));
+        add = new Button("ADD", (e) -> {
+            addToList();
+        });
+        delete = new Button("DELETE", (e) -> {
+            deleteFromList();
+        });
+        JPanel buttonHolder = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonHolder.add(add);
-        buttonHolder.add(delete);
         panel.add(buttonHolder);
     }
 
@@ -40,17 +45,19 @@ public class LanguageSetting extends SettingPane {
 
     private void deleteFromList() {
     }
+
     private void deleteFromList(List<Language> languageList) {
     }
 
     @Override
-    public void loaded(){
-        popup.setSize(720,360);
+    public void loaded() {
+        popup.setSize(720, 360);
     }
 
     @Override
     public void saved() {
-    popup.dispose();
+        Window.currentWindow.reCheckLanguage();
+        popup.dispose();
     }
 
     @Override
@@ -62,33 +69,58 @@ public class LanguageSetting extends SettingPane {
 
     private static class LanguagePane extends JPanel implements ActionListener {
         JLabel name;
+        Button compiler;
         Button keywordColor;
         Button keywords;
+        Button delete;
         Language language;
-        LanguagePane(Language language){
-            this.language=language;
-            setLayout(new GridLayout(1,3));
-            name=new JLabel(language.name);
-            keywordColor=new Button("Edit Keyword Color",this);
-            keywords=new Button("Edit Keywords",this);
+
+        LanguagePane(Language language) {
+
+            this.language = language;
+            setLayout(new GridLayout(1, 5));
+            name = new JLabel(language.name);
+            compiler = new Button(language.compiler, this);
+            keywordColor = new Button("Keyword-Color", this);
+            keywordColor.setForeground(language.keywordColor);
+            keywords = new Button("Edit Keywords", this);
+            delete = new Button("Delete", this);
             add(name);
+            add(compiler);
             add(keywordColor);
             add(keywords);
+            add(delete);
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource()==keywordColor){
+            Object source = e.getSource();
+            if (source == keywordColor) {
                 language.setKeywordColor(ThemeEditor.getColor(language.keywordColor));
-            }else if(e.getSource()==keywords){
+                keywordColor.setForeground(language.keywordColor);
+            } else if (source == keywords) {
                 keywordsEditor();
+            } else if (source == delete) {
+                deleteLanguage();
+            } else if (source == compiler) {
+                String compilerPath = Window.currentWindow.input("EDIT THE COMPILER/INTERPRETER", language.compiler);
+                if (compilerPath == null || compilerPath.trim().isEmpty()) {
+                    return;
+                }
+                language.compiler = compilerPath;
+                compiler.setText(language.compiler);
             }
         }
 
         private void keywordsEditor() {
-           String keywords= Window.currentWindow.input("EDIT THE KEYWORDS FOR "+language.name,language.getKeywordString());
-            if (keywords.isEmpty())return;
+            String keywords = Window.currentWindow.input("EDIT THE KEYWORDS FOR " + language.name, language.getKeywordString());
+            if (keywords.isEmpty()) return;
             language.setKeywords(keywords);
+        }
+
+        private void deleteLanguage() {
+            Language.remove(language);
+            LanguageSetting.current.refresh();
         }
     }
 }

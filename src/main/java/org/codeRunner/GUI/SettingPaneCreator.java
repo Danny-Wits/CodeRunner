@@ -12,24 +12,25 @@ public class SettingPaneCreator extends JPanel {
     Button save;
     Button close;
     JDialog popup;
-
-    public SettingPaneCreator(SettingPane settingPaneContent) {
+    String title;
+    public SettingPaneCreator(SettingPane settingPane) {
         setLayout(new BorderLayout());
-        content.add(settingPaneContent.getPanel());
+        this.title= settingPane.title;
+        content.add(settingPane.getPanel());
         add(content, BorderLayout.CENTER);
         JPanel buttonHolder = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        save = new Button("OK", settingPaneContent.getActionListener());
-        close = new Button("CANCEL", settingPaneContent.getActionListener());
+        save = new Button("OK", settingPane.getActionListener());
+        close = new Button("CANCEL", settingPane.getActionListener());
         buttonHolder.add(save);
         buttonHolder.add(close);
         add(buttonHolder, BorderLayout.SOUTH);
         popup = createPopup(this);
-        settingPaneContent.load(save, close, popup);
+        settingPane.load(save, close, popup);
         popup.setLocation(centreX(),centreY());
     }
 
     public JDialog createPopup(SettingPaneCreator settingPaneCreator) {
-        JDialog jDialog = new JDialog(Window.currentWindow, "SETTING", true);
+        JDialog jDialog = new JDialog(Window.currentWindow,title, true);
         jDialog.getContentPane().add(settingPaneCreator);
         return jDialog;
     }
