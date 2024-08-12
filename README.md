@@ -3,7 +3,7 @@ Click below to download the latest version for windows <a href="https://github.c
 
 Preview :
 <table>
-  <tr width="2">
+  <tr width=2>
     <td>
       <img
         src="https://github.com/user-attachments/assets/3521966f-2c5a-478d-b12b-86c93f8dc049"
@@ -17,9 +17,8 @@ Preview :
       alt=""
     />
 
-    <td></td>
   </tr>
-  <tr width="2">
+  <tr width=2>
     <img
       src="https://github.com/user-attachments/assets/a8a48cf9-9678-4b6b-a68e-a13d962e605c"
       alt=""
