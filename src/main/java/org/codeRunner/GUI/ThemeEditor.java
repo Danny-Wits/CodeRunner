@@ -31,10 +31,10 @@ public class ThemeEditor {
             currentLookAndFeelIndex = index;
             UIManager.setLookAndFeel(availableThemes[currentLookAndFeelIndex]);
             updateComponentTreeUI(parent);
-            Thread t = new Thread(() -> updateComponentTreeUI(parent.fileSelector));
-            t.setDaemon(true);
-            t.start();
-
+            Thread t1 = new Thread(() -> updateComponentTreeUI(parent.fileSelector));
+            t1.setDaemon(true);
+            t1.start();
+            updateComponentTreeUI(Window.WelcomePane);
         } catch (UnsupportedLookAndFeelException e) {
             throw new RuntimeException(e);
         }

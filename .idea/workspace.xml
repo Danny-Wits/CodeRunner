@@ -9,20 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8450b6e2-bb5b-49cb-90ed-69c5d7432f67" name="Changes" comment="adding new Language Setting">
+    <list default="true" id="8450b6e2-bb5b-49cb-90ed-69c5d7432f67" name="Changes" comment="1. Quick Refresh &#10;2. Language Deletion&#10;3. Language Serialization">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar2/CodeRunner.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CodeRunner_jar2/CodeRunner.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageAdder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageAdder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Components/LanguageSetting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/FileSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/FileSelector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Interfaces/SettingPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Interfaces/SettingPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/SettingPaneCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/SettingPaneCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/ThemeEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/ThemeEditor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/GUI/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/Language.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/SettingProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/SettingProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/SettingState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/SettingState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/codeRunner/Scripts/State.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -349,7 +340,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723381212551</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="1. Quick Refresh &#10;2. Language Deletion&#10;3. Language Serialization">
+      <option name="closed" value="true" />
+      <created>1723463813999</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1723463813999</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -378,6 +377,7 @@
     <MESSAGE value="fixed undo redo issue" />
     <MESSAGE value="added new SettingPane system and language compiler availability check" />
     <MESSAGE value="adding new Language Setting" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding new Language Setting" />
+    <MESSAGE value="1. Quick Refresh &#10;2. Language Deletion&#10;3. Language Serialization" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. Quick Refresh &#10;2. Language Deletion&#10;3. Language Serialization" />
   </component>
 </project>
