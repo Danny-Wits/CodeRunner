@@ -1,5 +1,7 @@
 A simple Code editing and running tool for beginners .
-Click below to download the latest version for windows <a href="https://github.com/Danny-Wits/CodeRunner/releases">DOWLOAD INSTALLER</a>
+<b>Installation</b>
+1. Download the latest release for windows here :<a href="https://github.com/Danny-Wits/CodeRunner/releases">Release</a>
+2. Download the latest beta Jar file with a runner bat here :<a href="[https://github.com/Danny-Wits/CodeRunner/releases](https://github.com/Danny-Wits/CodeRunner/blob/master/out/artifacts/CodeRunner_jar2/)">JAR and Runner </a>
 
 Preview :
 <table>
