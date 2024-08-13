@@ -40,7 +40,7 @@ public class LanguageSetting extends SettingPane {
     }
 
     private void addToList() {
-        SettingProcessor.getLanguageAdder();
+        SettingProcessor.getLanguageAdderPane();
     }
 
     private void deleteFromList() {

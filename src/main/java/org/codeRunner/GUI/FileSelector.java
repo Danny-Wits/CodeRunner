@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
+import java.util.Arrays;
 
 
 public class FileSelector extends JFileChooser {
@@ -17,7 +18,8 @@ public class FileSelector extends JFileChooser {
 
      }
      public String getFile(String title){
-         FileNameExtensionFilter filter = new FileNameExtensionFilter("Source Code ", Language.getAvailableExtensions());
+         String[]languageList=Language.getAvailableExtensions();
+         FileNameExtensionFilter filter = new FileNameExtensionFilter("Source Code | "+Arrays.toString(languageList),languageList );
          this.setFileFilter(filter);
          this.setDialogTitle(title);
          int returnStatus = this.showOpenDialog(this.parent);
@@ -28,7 +30,8 @@ public class FileSelector extends JFileChooser {
          return null;
      }
     public String saveFile(String title){
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Source Code ", Language.getAvailableExtensions());
+        String[]languageList=Language.getAvailableExtensions();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Source Code | "+Arrays.toString(languageList),languageList );
         this.setFileFilter(filter);
         this.setDialogTitle(title);
         int returnStatus = this.showSaveDialog(this.parent);

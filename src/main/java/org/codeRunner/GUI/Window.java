@@ -21,7 +21,7 @@ public class Window extends JFrame implements ActionListener, KeyListener {
     JMenuBar menuBar;
     JMenu fileMenu, editMenu, settingMenu, preferenceMenu;
     MenuItem newB, open, saveAs, save;
-    MenuItem rename, move, undo, redo;
+    MenuItem rename, move, undo, redo, find, replace;
     MenuItem languageInfo, languageSetting;
     MenuItem theme;
 
@@ -101,6 +101,8 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         move = new MenuItem("Move", this, DefaultFont, "Ctrl+Q", "/assets/moveFile.png");
         undo = new MenuItem("Undo", this, DefaultFont, "Ctrl+Z", "/assets/moveFile.png");
         redo = new MenuItem("Redo", this, DefaultFont, "Ctrl+Y", "/assets/moveFile.png");
+        find = new MenuItem("Find", this, DefaultFont, "Ctrl+F", "/assets/moveFile.png");
+        replace = new MenuItem("Replace", this, DefaultFont, "Ctrl+Shift+F", "/assets/moveFile.png");
 
         languageInfo = new MenuItem("Info", this, DefaultFont, "Language Setting", "/assets/moveFile.png");
         languageSetting = new MenuItem("Setting", this, DefaultFont, "Language Setting", "/assets/moveFile.png");
@@ -119,6 +121,8 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         editMenu.add(move);
         editMenu.add(undo);
         editMenu.add(redo);
+        editMenu.add(find);
+        editMenu.add(replace);
 
         settingMenu = new JMenu("SETTING");
         JMenu language = new JMenu("Language");
@@ -274,6 +278,15 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         SettingProcessor.getLanguageSettingPane();
     }
 
+    void findText() {
+        String text = input("Enter the word you want to find ", "");
+        getCurrentCodePanel().findText(text);
+    }
+
+    void replaceText() {
+        SettingProcessor.getReplacePane();
+    }
+
     //IO
     public String input(String prompt) {
         String name = JOptionPane.showInputDialog(this, prompt);
@@ -298,7 +311,7 @@ public class Window extends JFrame implements ActionListener, KeyListener {
 
 
     //Panel Management
-    void addCodePanel(CodePanel codePanel) {
+    public void addCodePanel(CodePanel codePanel) {
         System.out.println(codePanelList.size());
         int location = codePanel.locationIn(codePanelList);
         if (location != -1) {
@@ -316,7 +329,7 @@ public class Window extends JFrame implements ActionListener, KeyListener {
         codeTabs.setSelectedIndex(codePanelList.size() - 1);
     }
 
-    void removeCurrentCodePanel() {
+    public void removeCurrentCodePanel() {
         int index = codeTabs.getSelectedIndex();
         codePanelList.remove(index);
         codeTabs.remove(index);
@@ -326,7 +339,7 @@ public class Window extends JFrame implements ActionListener, KeyListener {
 //        reRender();
     }
 
-    CodePanel getCurrentCodePanel() {
+    public CodePanel getCurrentCodePanel() {
         int index = codeTabs.getSelectedIndex();
         if (index == -1) return null;
         return codePanelList.get(index);
@@ -359,6 +372,10 @@ public class Window extends JFrame implements ActionListener, KeyListener {
             undoChange();
         } else if (eventTrigger == redo) {
             redoChange();
+        } else if (eventTrigger == find) {
+            findText();
+        } else if (eventTrigger == replace) {
+            replaceText();
         }
     }
 
@@ -379,6 +396,8 @@ public class Window extends JFrame implements ActionListener, KeyListener {
                 removeCurrentCodePanel();
             } else if (code == getCtrlKeyCode('r')) {
                 renameFile();
+            } else if (code == getCtrlKeyCode('f')) {
+                replaceText();
             }
             return;
         }
@@ -399,20 +418,24 @@ public class Window extends JFrame implements ActionListener, KeyListener {
             undoChange();
         } else if (code == getCtrlKeyCode('y')) {
             redoChange();
+        } else if (code == getCtrlKeyCode('f')) {
+            findText();
         }
 
     }
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-    }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyPressed(KeyEvent e) {
         CodePanel current = getCurrentCodePanel();
         if (current != null) {
             current.reload();
         }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 
     public void runTask(String path) {

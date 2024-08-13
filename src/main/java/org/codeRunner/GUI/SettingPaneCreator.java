@@ -21,8 +21,10 @@ public class SettingPaneCreator extends JPanel {
         JPanel buttonHolder = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         save = new Button("OK", settingPane.getActionListener());
         close = new Button("CANCEL", settingPane.getActionListener());
-        buttonHolder.add(save);
-        buttonHolder.add(close);
+        if(settingPane.showButton){
+            buttonHolder.add(save);
+            buttonHolder.add(close);
+        }
         add(buttonHolder, BorderLayout.SOUTH);
         popup = createPopup(this);
         settingPane.load(save, close, popup);

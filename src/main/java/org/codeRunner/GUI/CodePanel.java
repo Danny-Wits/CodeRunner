@@ -8,6 +8,7 @@ import org.codeRunner.Scripts.SyntaxHL;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 import javax.swing.undo.UndoManager;
 import java.awt.*;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 public class CodePanel extends JPanel implements ActionListener {
     JTextPane codeArea;
     StyledDocument codeAreaDoc;
-    SyntaxHL syntaxHighLighter;
+    public SyntaxHL syntaxHighLighter;
     UndoManager undoManager;
     Language language;
     public String path;
@@ -59,7 +60,8 @@ public class CodePanel extends JPanel implements ActionListener {
     private void setActions() {
         JPanel buttonBox = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel runnable=new JLabel();
-        if (isRunnable())runnable.setIcon(FileSystem.getImageIcon("/assets/tickIcon.png"));
+        Thread runCheck=new Thread(()->{if (isRunnable())runnable.setIcon(FileSystem.getImageIcon("/assets/tickIcon.png"));});
+        runCheck.start();
         buttonBox.add(runnable);
         runButton = new Button("RUN", this, Window.DefaultFont, "Ctrl+R", "/assets/runFile.png");
         buttonBox.add(runButton);
@@ -100,6 +102,7 @@ public class CodePanel extends JPanel implements ActionListener {
     public boolean isRunnable(){
        return Code.checkInstall(language);
     }
+
     public Icon getIcon() {
         String path = String.format("/assets/%sLogo.png", language.extension);
         return FileSystem.getImageIcon(path);
@@ -159,12 +162,48 @@ public class CodePanel extends JPanel implements ActionListener {
         return new File(this.path);
     }
 
-    private int getSizeOfFile() {
+    public int getSizeOfFile() {
 
         return FileSystem.getSize(path) / 1024;
     }
 
+    public void setCursorPostition(int index){
+        if(index<0||index>getText().length())return;
+        codeArea.setCaretPosition(index);
+    }
 
+    public  void findText(String text ) {
+        if(text==null)return;
+        if(text.trim().isEmpty())return;
+        setCursorPostition(syntaxHighLighter.highLight(text,0));
+    }
+
+    public  boolean replaceText(String find,String replace,int offset){
+        if(find==null)return false;
+        if(find.trim().isEmpty()) return false;
+        int pos=0;
+        int length;
+        int index=-1;
+        String text=getText();
+        for (String textW : text.split("\\W")) {
+            pos = text.indexOf(textW, pos);
+            length = textW.length();
+            if (textW.matches(find)) {
+                index=pos;
+                break;
+            }
+            pos += length;
+        }
+        if(index==-1||index>text.length())return false;
+        try {
+            codeAreaDoc.remove(index,find.length());
+            codeAreaDoc.insertString(index,replace,null);
+            undoManager.discardAllEdits();
+            return true;
+        } catch (BadLocationException e) {
+            return false;
+        }
+    }
     //Action Management
     @Override
     public void actionPerformed(ActionEvent e) {
